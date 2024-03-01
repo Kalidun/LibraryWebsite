@@ -20,7 +20,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="p-0 m-0 box-border bg-gray-100 min-h-screen min-w-screen">
+<body class="p-0 m-0 box-border bg-teal-50 min-h-screen min-w-screen">
 
     @include('partials.navbar')
 

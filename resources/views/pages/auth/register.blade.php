@@ -5,11 +5,6 @@
         <div class="flex flex-col bg-gray-200 p-4 rounded-xl w-full md:w-5/6 m-2 shadow-lg">
             <div class="w-full flex flex-col justify-center items-center">
                 <p class="text-xl font-bold mb-4 text-start">Register</p>
-                @if (session()->has('loginError'))
-                    <div class="p-2 bg-red-200 border border-red-300 rounded-xl">
-                        <p class="text-red-500">{{ session('loginError') }}</p>
-                    </div>
-                @endif
                 <form action="{{ route('register.post') }}" class="flex flex-col gap-4 w-4/5 mb-4" method="POST">
                     @csrf
                     <div class="flex flex-col">
@@ -42,10 +37,10 @@
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button class="bg-blue-500 p-1 rounded-xl text-white w-1/3">Login</button>
+                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/3">Login</button>
                 </form>
                 <div>
-                    <a href="{{ route('login') }}" class="text-blue-500">Already have an account?</a>
+                    <a href="{{ route('login') }}" class="text-teal-700">Already have an account?</a>
                 </div>
             </div>
         </div>

@@ -39,10 +39,10 @@
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button class="bg-blue-500 p-1 rounded-xl text-white w-1/3">Login</button>
+                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/3">Login</button>
                 </form>
                 <div>
-                    <a href="{{ route('register') }}" class="text-blue-500">Don't have an account?</a>
+                    <a href="{{ route('register') }}" class="text-teal-700">Don't have an account?</a>
                 </div>
             </div>
         </div>
