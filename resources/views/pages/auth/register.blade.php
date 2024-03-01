@@ -1,25 +1,28 @@
 @extends('layout.app')
 
 @section('content')
-    <div class="flex flex-col w-72 mt-10 md:w-1/3 justify-center items-center">
+    <div class="flex flex-col w-72 mt-10 md:w-1/3 justify-center items-center mb-10">
         <div class="flex flex-col bg-gray-200 p-4 rounded-xl w-full md:w-5/6 m-2 shadow-lg">
             <div class="w-full flex flex-col justify-center items-center">
-                <p class="text-xl font-bold mb-4 text-start">Login</p>
+                <p class="text-xl font-bold mb-4 text-start">Register</p>
                 @if (session()->has('loginError'))
                     <div class="p-2 bg-red-200 border border-red-300 rounded-xl">
                         <p class="text-red-500">{{ session('loginError') }}</p>
                     </div>
                 @endif
-                @if (session()->has('success'))
-                    <div class="p-2 bg-green-200 border border-green-300 rounded-xl">
-                        <p class="text-green-500">{{ session('success') }}</p>
-                    </div>
-                @endif
-                <form action="{{ route('login.post') }}" class="flex flex-col gap-4 w-4/5 mb-4" method="POST">
+                <form action="{{ route('register.post') }}" class="flex flex-col gap-4 w-4/5 mb-4" method="POST">
                     @csrf
                     <div class="flex flex-col">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" class="border border-black p-1 rounded-xl"
+                        autofocus required value="{{ old('username') }}" placeholder="username">                 
+                        @error('username')
+                            <p class="text-red-500 text-sm">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div class="flex flex-col">
                         <label for="email">Email</label>
-                        <input type="text" name="email" id="email" class="border border-black p-1 rounded-xl"
+                        <input type="email" name="email" id="email" class="border border-black p-1 rounded-xl"
                         autofocus required value="{{ old('email') }}" placeholder="Email">                 
                         @error('email')
                             <p class="text-red-500 text-sm">{{ $message }}</p>
@@ -42,7 +45,7 @@
                     <button class="bg-blue-500 p-1 rounded-xl text-white w-1/3">Login</button>
                 </form>
                 <div>
-                    <a href="{{ route('register') }}" class="text-blue-500">Don't have an account?</a>
+                    <a href="{{ route('login') }}" class="text-blue-500">Already have an account?</a>
                 </div>
             </div>
         </div>
