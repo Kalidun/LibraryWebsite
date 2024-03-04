@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Create\CreateController;
+use App\Http\Controllers\Library\LibraryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -19,8 +21,16 @@ Route::middleware('auth')->group(function () {
     Route::controller(HomeController::class)->group(function () {
         Route::get('/', 'index')->name('home');
     });
-
-    
+    Route::prefix('library')->group(function () {
+        Route::controller(LibraryController::class)->group(function () {
+            Route::get('/', 'index')->name('library.index');
+        });
+    });
+    Route::prefix('create')->group(function () {
+        Route::controller(CreateController::class)->group(function () {
+            Route::get('/', 'index')->name('create.index');
+        });
+    });
     Route::controller(LoginController::class)->group(function () {
         Route::post('logout', 'logout')->name('logout');
     });

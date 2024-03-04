@@ -1,4 +1,4 @@
-<div class="h-full px-3 py-4 overflow-y-auto bg-teal-100">
+<div class="h-full px-3 py-4 overflow-y-auto bg-teal-100 ">
     <ul class="space-y-2 font-medium">
         <li>
             <a href="{{ route('home') }}"
@@ -8,48 +8,17 @@
             </a>
         </li>
         <li>
-            <button type="button"
-                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
-                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-                <i class="fa-solid fa-circle-plus text-black"></i>
-                <span class="flex-1 ms-3 text-black text-left">Create</span>
-                <i class="fa-solid fa-chevron-down text-black"></i>
-            </button>
-            <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                <li>
-                    <a href="#"
-                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
-                        <i class="fa-solid fa-book-medical"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">
-                            New Book
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#"
-                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
-                        <i class="fa-solid fa-layer-group"></i>    
-                        <span class="flex-1 ms-3 whitespace-nowrap">
-                            New Category
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+            <a href="{{ route('library.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('library.index') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa-solid fa-book"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">Library</span>
             </a>
         </li>
         <li>
-            <a href="#"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
-                <i class="fa-solid fa-comment-dots"></i>
-                <span class="flex-1 ms-3 whitespace-nowrap">
-                    Request Book
-                </span>
+            <a href="{{ route('create.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('create.index') ? 'bg-teal-300 text-white' : '' }}">
+                <i class="fa-solid fa-circle-plus"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Create</span>
             </a>
         </li>
         <li>
@@ -67,6 +36,22 @@
             </a>
         </li>
         <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">
+                    Request Book
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa-solid fa-comments"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Chat</span>
+            </a>
+        </li>
+        <li>
             <form action="{{ route('logout') }}" method="POST" class="flex w-full">
                 @csrf
                 <button type="submit" class="flex p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 w-full items-center">
@@ -77,3 +62,32 @@
         </li>
     </ul>
 </div>
+{{-- <li>
+    <button type="button"
+        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
+        aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+        <i class="fa-solid fa-circle-plus text-black"></i>
+        <span class="flex-1 ms-3 text-black text-left">Create</span>
+        <i class="fa-solid fa-chevron-down text-black"></i>
+    </button>
+    <ul id="dropdown-example" class="hidden py-2 space-y-2">
+        <li>
+            <a href="#"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
+                <i class="fa-solid fa-book-medical"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">
+                    Book
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
+                <i class="fa-solid fa-layer-group"></i>    
+                <span class="flex-1 ms-3 whitespace-nowrap">
+                    Category
+                </span>
+            </a>
+        </li>
+    </ul>
+</li> --}}

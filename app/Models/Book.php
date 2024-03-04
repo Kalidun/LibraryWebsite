@@ -19,4 +19,9 @@ class Book extends Model
     {
         return $this->hasMany(BookStock::class);
     }
+
+    public function scopeFilter($query, $search)
+    {
+        return $query->where('title', 'like', '%' . $search . '%');
+    }
 }

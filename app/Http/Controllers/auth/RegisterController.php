@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\Rules\Unique;
+use Illuminate\Support\Facades\Hash;
 
 class RegisterController extends Controller
 {
@@ -18,7 +18,7 @@ class RegisterController extends Controller
             'email' => 'required|max:255|email:dns|unique:users',
             'password' => 'required|min:5|max:255',
         ]);
-        $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['password'] = Hash::make($validatedData['password']);
         // dd($validatedData);
         User::create($validatedData);
         return redirect('login')->with('success', 'Registration Successfull, Please Login!');

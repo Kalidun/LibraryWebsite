@@ -20,9 +20,10 @@
             height: 100%;
             margin: 0;
             box-sizing: border-box;
+            scroll-behavior: smooth;
         }
     </style>
-
+    @livewireStyles
     {{-- FlowBite Link --}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     {{-- Tailwind Link --}}
@@ -36,6 +37,8 @@
     @yield('content')
 
     @include('partials.footer')
+
+    @livewireScripts
 </body>
 {{-- Jquery Link --}}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

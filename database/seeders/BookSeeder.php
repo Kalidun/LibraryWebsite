@@ -13,20 +13,13 @@ class BookSeeder extends Seeder
      */
     public function run(): void
     {
-        Book::create([
-            'title' => 'title',
-            'author' => 'author',
-            'category_id' => 1
-        ]);
-        Book::create([
-            'title' => 'title2',
-            'author' => 'author2',
-            'category_id' => 2
-        ]);
-        Book::create([
-            'title' => 'title3',
-            'author' => 'author3',
-            'category_id' => 2
-        ]);
+        for($i = 0;$i < 10; $i++){
+            Book::create([
+                'title' => 'Book '.$i,
+                'author' => 'Author '.$i,
+                'description' => 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iusto deleniti modi animi!',
+                'category_id' => rand(1, 3)
+            ]);
+        }
     }
 }
