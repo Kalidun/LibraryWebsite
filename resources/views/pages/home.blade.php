@@ -1,5 +1,8 @@
 @extends('layout.dashboard')
+{{-- @extends('layout.app') --}}
 
 @section('section')
-    <p class="text-xl">Home</p>
+    <p class="font-bold">
+        Welcome
+    </p>
 @endSection

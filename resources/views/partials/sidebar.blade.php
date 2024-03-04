@@ -1,34 +1,79 @@
-<div class="w-full">
-    <div id="menu" class="p-2 hover:cursor-pointer flex flex-col gap-4">
-        <div id="header" class="text-xl mb-2 flex flex-col justify-center items-center h-fit p-2">
-            <i class="fa-solid fa-book-open-reader text-3xl"></i>
-            <span>Menu</span>
-        </div>
-        <div id="menu-body" class="flex flex-col gap-1 h-fit">
-            <a id="menu-items"
-                class="flex w-full p-2 items-center gap-2 text-sm rounded hover:bg-teal-300 hover:text-white {{ request()->routeIs('home') ? 'bg-teal-300 text-white' : '' }}"
-                href="{{ route('home') }}">
+<div class="h-full px-3 py-4 overflow-y-auto bg-teal-100">
+    <ul class="space-y-2 font-medium">
+        <li>
+            <a href="{{ route('home') }}"
+                class="flex items-center p-2 rounded-lg hover:bg-teal-300 hover:text-white group transition duration-75 {{ request()->routeIs('home') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa fa-home"></i>
-                <span class="text-base">Home</span>
+                <span class="ms-3">Home</span>
             </a>
-            <a id="menu-items"
-                class="flex w-full p-2 items-center gap-2 text-sm rounded hover:bg-teal-300 hover:text-white"    
-                href="{{ route('home') }}">
-                <i class="fa fa-home"></i>
-                <span class="text-base">Library</span>
+        </li>
+        <li>
+            <button type="button"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
+                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                <i class="fa-solid fa-circle-plus text-black"></i>
+                <span class="flex-1 ms-3 text-black text-left">Create</span>
+                <i class="fa-solid fa-chevron-down text-black"></i>
+            </button>
+            <ul id="dropdown-example" class="hidden py-2 space-y-2">
+                <li>
+                    <a href="#"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
+                        <i class="fa-solid fa-book-medical"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            New Book
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
+                        <i class="fa-solid fa-layer-group"></i>    
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            New Category
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa-solid fa-book"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Library</span>
             </a>
-            <a id="menu-items"
-                class="flex w-full p-2 items-center gap-2 text-sm rounded hover:bg-teal-300 hover:text-white"
-                href="{{ route('home') }}">
-                <i class="fa fa-home"></i>
-                <span class="text-base">Borrowed Books</span>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa-solid fa-comment-dots"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">
+                    Request Book
+                </span>
             </a>
-            <a id="menu-items"
-                class="flex w-full p-2 items-center gap-2 text-sm rounded hover:bg-teal-300 hover:text-white"
-                href="{{ route('home') }}">
-                <i class="fa fa-home"></i>
-                <span class="text-base">Profile</span>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa-solid fa-book-bookmark"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Borrowed Books</span>
             </a>
-        </div>
-    </div>
+        </li>
+        <li>
+            <a href="#"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+                <i class="fa fa-user"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
+            </a>
+        </li>
+        <li>
+            <form action="{{ route('logout') }}" method="POST" class="flex w-full">
+                @csrf
+                <button type="submit" class="flex p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 w-full items-center">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="flex-1 ms-3 whitespace-nowrap text-left">Logout</span>
+                </button>
+            </form>
+        </li>
+    </ul>
 </div>

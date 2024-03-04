@@ -10,29 +10,36 @@
     <script src="https://kit.fontawesome.com/f9dc9fae33.js" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&display=swap');
+
         body {
             font-family: 'Quicksand', sans-serif;
         }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            box-sizing: border-box;
+        }
     </style>
 
-
+    {{-- FlowBite Link --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     {{-- Tailwind Link --}}
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="p-0 m-0 box-border bg-teal-50 min-h-screen min-w-screen">
+<body class="p-0 m-0 bg-teal-50 min-w-screen h-fit" style="min-height: 100vh;">
 
     @include('partials.navbar')
 
-    <div class="w-full">
-        <div class="container-xl flex justify-center">
-            @yield('content')
-        </div>
-    </div>
+    @yield('content')
 
     @include('partials.footer')
 </body>
 {{-- Jquery Link --}}
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+{{-- Flowbite JS --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
 </html>

@@ -1,7 +1,7 @@
-@extends('layout.app')
+@extends('layout.auth')
 
-@section('content')
-    <div class="flex flex-col w-72 mt-10 md:w-1/3 justify-center items-center">
+@section('section')
+    <div class="flex flex-col w-72 md:w-1/3 justify-center items-center">
         <div class="flex flex-col bg-gray-200 p-4 rounded-xl w-full md:w-5/6 m-2 shadow-lg">
             <div class="w-full flex flex-col justify-center items-center">
                 <p class="text-xl font-bold mb-4 text-start">Login</p>
