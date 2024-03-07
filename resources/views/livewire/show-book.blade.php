@@ -10,14 +10,16 @@
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">
         @foreach($books as $book)
-        <a href="#" class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col">
+        <a href="{{ route('library.show', $book->id) }}" class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl shadow-xl hover:scale-105 transition duration-200 max-h-[18rem]">
             <div id="title">
                 <p class="capitalize font-bold mb-2">{{ $book->title }}</p>
             </div>
             <div id="image" class="h-full flex justify-center">
-                {{-- <img src="{{ $book->image }}"> --}}
-                {{-- Make Random image for develop --}}
-                <img src="https://picsum.photos/200/300" class="w-44 h-auto rounded-xl">
+                @if($book->image == null)
+                <img src="{{ asset('images/defaultPhoto.avif') }}" class="w-44 h-auto rounded-xl">
+                @else
+                <img src="{{ asset('storage/images/books/' . $book->image) }}" class="w-44 h-auto rounded-xl">
+                @endif
             </div>
             <div id="description" class="text-center flex flex-wrap justify-between mt-3 gap-2">
                 <p>{{ $book->category->name }}</p>

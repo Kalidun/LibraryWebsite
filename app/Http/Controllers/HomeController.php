@@ -14,6 +14,7 @@ class HomeController extends Controller
         $borrowedBooks = BorrowedBook::where('user_id', auth()->user()->id)->get();
         $totalUser = User::count();
         $totalBook = Book::count();
-        return view('pages.home', compact('borrowedBooks', 'totalUser', 'totalBook'));
+        $bookRecentImgs = Book::orderBy('id', 'desc')->limit(5)->get();
+        return view('pages.home', compact('borrowedBooks', 'totalUser', 'totalBook' , 'bookRecentImgs'));
     }
 }

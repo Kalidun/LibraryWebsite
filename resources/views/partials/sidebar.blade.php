@@ -15,10 +15,10 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('create.index') }}"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('create.index') ? 'bg-teal-300 text-white' : '' }}">
-                <i class="fa-solid fa-circle-plus"></i>
-                <span class="flex-1 ms-3 whitespace-nowrap">Create</span>
+            <a href="{{ route('data.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('data.index') ? 'bg-teal-300 text-white' : '' }}">
+                <i class="fa-solid fa-plus"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">All Data</span>
             </a>
         </li>
         <li>

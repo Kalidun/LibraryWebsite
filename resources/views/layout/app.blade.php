@@ -33,7 +33,7 @@
 <body class="p-0 m-0 bg-teal-50 min-w-screen h-fit" style="min-height: 100vh;">
 
     @include('partials.navbar')
-
+    @include('partials.toast')
     @yield('content')
 
     @include('partials.footer')

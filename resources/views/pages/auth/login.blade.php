@@ -10,11 +10,6 @@
                         <p class="text-red-500">{{ session('loginError') }}</p>
                     </div>
                 @endif
-                @if (session()->has('success'))
-                    <div class="p-2 bg-green-200 border border-green-300 rounded-xl">
-                        <p class="text-green-500">{{ session('success') }}</p>
-                    </div>
-                @endif
                 <form action="{{ route('login.post') }}" class="flex flex-col gap-4 w-4/5 mb-4" method="POST">
                     @csrf
                     <div class="flex flex-col">

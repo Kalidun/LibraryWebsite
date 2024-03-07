@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Create\CreateController;
+use App\Http\Controllers\Data\Create\CreateController;
+use App\Http\Controllers\Data\ShowController;
 use App\Http\Controllers\Library\LibraryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -24,11 +25,18 @@ Route::middleware('auth')->group(function () {
     Route::prefix('library')->group(function () {
         Route::controller(LibraryController::class)->group(function () {
             Route::get('/', 'index')->name('library.index');
+            Route::get('/{id}', 'show')->name('library.show');
         });
     });
-    Route::prefix('create')->group(function () {
-        Route::controller(CreateController::class)->group(function () {
-            Route::get('/', 'index')->name('create.index');
+    Route::prefix('Data')->group(function () {
+        Route::controller(ShowController::class)->group(function () {
+            Route::get('/', 'index')->name('data.index');
+        });
+        Route::prefix('create')->group(function () {
+            Route::controller(CreateController::class)->group(function () {
+                Route::post('/book', 'createBook')->name('data.create.book');
+                Route::post('/category', 'createCategory')->name('data.create.category');
+            });
         });
     });
     Route::controller(LoginController::class)->group(function () {
