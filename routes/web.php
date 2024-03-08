@@ -25,7 +25,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('library')->group(function () {
         Route::controller(LibraryController::class)->group(function () {
             Route::get('/', 'index')->name('library.index');
-            Route::get('/{id}', 'show')->name('library.show');
+            Route::get('/{title}', 'show')->name('library.show');
+            Route::post('/borrow', 'borrow')->name('library.borrow');
         });
     });
     Route::prefix('Data')->group(function () {

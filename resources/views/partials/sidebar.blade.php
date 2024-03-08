@@ -9,16 +9,9 @@
         </li>
         <li>
             <a href="{{ route('library.index') }}"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('library.index') ? 'bg-teal-300 text-white' : '' }}">
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('library.*') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa-solid fa-book"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">Library</span>
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('data.index') }}"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('data.index') ? 'bg-teal-300 text-white' : '' }}">
-                <i class="fa-solid fa-plus"></i>
-                <span class="flex-1 ms-3 whitespace-nowrap">All Data</span>
             </a>
         </li>
         <li>
@@ -26,6 +19,13 @@
                 class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
                 <i class="fa-solid fa-book-bookmark"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">Borrowed Books</span>
+            </a>
+        </li>
+        <li>
+            <a href="{{ route('data.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('data.index') ? 'bg-teal-300 text-white' : '' }}">
+                <i class="fa-solid fa-plus"></i>
+                <span class="flex-1 ms-3 whitespace-nowrap">All Data</span>
             </a>
         </li>
         <li>
@@ -54,7 +54,8 @@
         <li>
             <form action="{{ route('logout') }}" method="POST" class="flex w-full">
                 @csrf
-                <button type="submit" class="flex p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 w-full items-center">
+                <button type="submit"
+                    class="flex p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 w-full items-center">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="flex-1 ms-3 whitespace-nowrap text-left">Logout</span>
                 </button>

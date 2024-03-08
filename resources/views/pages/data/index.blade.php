@@ -27,7 +27,7 @@
                         <th>Action</th>
                     </tr>
                     @foreach ($bookCategories as $category)
-                        <tr class="text-center">
+                        <tr class="text-center bg-white">
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $category->name }}</td>
                             <td>{{ $books->where('category_id', $category->id)->count() }}</td>
@@ -43,32 +43,34 @@
             </div>
             <div class="mt-5">
                 <p class="font-bold text-xl">Book</p>
-                <table class="w-full mt-5 bg-teal-200 p-2 rounded shadow-md">
-                    <tr class="border-b border-black">
-                        <th>No</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Category</th>
-                        <th>Stock</th>
-                        <th>Action</th>
-                    </tr>
-                    @foreach ($books as $book)
-                        <tr class="text-center">
-                            <td>{{ $loop->iteration }}</td>
-                            <td class="capitalize">{{ $book->title }}</td>
-                            <td>{{ $book->author }}</td>
-                            <td>{{ $book->category->name }}</td>
-                            <td>{{ $bookStock->where('book_id', $book->id)->count() }}</td>
-                            <td>
-                                {{-- <a href="{{ route('data.edit.book', $book->id) }}"></a>
-                                <a href="{{ route('data.delete.book', $book->id) }}"></a> --}}
-                                <a href="#"><i class="fa-solid fa-eye"></i></a>
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#"><i class="fa-solid fa-trash"></i></a>
-                            </td>
+                <div class="overflow-x-auto max-w-full">
+                    <table class="w-full mt-5 bg-teal-200 p-2 rounded shadow-md">
+                        <tr class="border-b border-black">
+                            <th>No</th>
+                            <th>Title</th>
+                            <th>Author</th>
+                            <th>Category</th>
+                            <th>Stock</th>
+                            <th>Action</th>
                         </tr>
-                    @endforeach
-                </table>
+                        @foreach ($books as $book)
+                            <tr class="text-center bg-white">
+                                <td>{{ $loop->iteration }}</td>
+                                <td class="capitalize">{{ $book->title }}</td>
+                                <td>{{ $book->author }}</td>
+                                <td>{{ $book->category->name }}</td>
+                                <td>{{ $bookStock->where('book_id', $book->id)->count() }}</td>
+                                <td>
+                                    {{-- <a href="{{ route('data.edit.book', $book->id) }}"></a>
+                                <a href="{{ route('data.delete.book', $book->id) }}"></a> --}}
+                                    <a href="#"><i class="fa-solid fa-eye"></i></a>
+                                    <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="#"><i class="fa-solid fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
             </div>
         </div>
 

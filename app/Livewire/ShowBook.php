@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Book;
 use Livewire\Component;
+use App\Models\BookStock;
 use App\Models\BookCategory;
 
 class ShowBook extends Component
@@ -15,6 +16,7 @@ class ShowBook extends Component
     {
         $bookCategories = BookCategory::all();
         $books = [];
+        $bookStock = BookStock::all();
         if($this->categories != 'All' || $this->search){
             if($this->categories != 'All' && $this->search == null){
                 $books = Book::where('category_id', $this->categories)->latest()->orderBy('id', 'DESC')->get();
@@ -30,7 +32,8 @@ class ShowBook extends Component
         }
         return view('livewire.show-book', [
             'books' => $books,
-            'bookCategories' => $bookCategories
+            'bookCategories' => $bookCategories,
+            'bookStock' => $bookStock
         ]);
     }
     public function updateSearch()

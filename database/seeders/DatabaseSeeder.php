@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
             BookCategorySeeder::class,
             BookStatusSeeder::class,
             MainUserSeeder::class,
-            BookSeeder::class,
+            // BookSeeder::class,
             // Book::factory(25)->create(),
-            BookStockSeeder::class,
-            BorrowedBookSeeder::class
+            // BookStockSeeder::class,
+            // BorrowedBookSeeder::class
         ]);
     }
 }

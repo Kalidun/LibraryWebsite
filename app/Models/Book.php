@@ -24,4 +24,8 @@ class Book extends Model
     {
         return $query->where('title', 'like', '%' . $search . '%');
     }
+    // Search by title
+    public function getRouteKeyName(){
+        return 'title';
+    }
 }

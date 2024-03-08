@@ -11,30 +11,24 @@
 
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
-                <div class="font-bold text-xl">Recent Books</div> 
+                <div class="font-bold text-xl">Recent Books</div>
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     @foreach ($bookRecentImgs as $bookRecentImg)
                         <div class="hidden duration-700 ease-in-out max-w-full" data-carousel-item>
                             <img src="{{ asset('storage/images/books/' . $bookRecentImg->image) }}"
                                 class="absolute block h-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 p-10">
-                                <div id="title-book">
-                                    <p class="capitalize font-bold mb-2 text-center">{{ $bookRecentImg->title }}</p>
-                                </div>
+                            <div id="title-book">
+                                <p class="capitalize font-bold mb-2 text-center">{{ $bookRecentImg->title }}</p>
+                            </div>
                         </div>
                     @endforeach
                 </div>
                 <!-- Slider indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide 1"
-                        data-carousel-slide-to="0"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 2"
-                        data-carousel-slide-to="1"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 3"
-                        data-carousel-slide-to="2"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 4"
-                        data-carousel-slide-to="3"></button>
-                    <button type="button" class="w-3 h-3 rounded-full" aria-current="false" aria-label="Slide 5"
-                        data-carousel-slide-to="4"></button>
+                    @foreach ($bookRecentImgs as $key => $bookRecentImg)
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $key + 1 }}"
+                            data-carousel-slide-to="{{ $key }}"></button>
+                    @endforeach
                 </div>
                 <!-- Slider controls -->
                 <button type="button"

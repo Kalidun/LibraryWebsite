@@ -21,7 +21,8 @@
 @endif
 @if (session()->has('error'))
     <div id="toast_error"
-        class="fixed top-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow z-[100] transition-all duration-500 ease">
+        class="fixed top-5 right-0 sm:top-10 sm:right-10 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow z-[100] transition-all duration-500 ease"
+        role="alert">
         <div
             class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
             <i class="fa-solid fa-circle-xmark"></i>
@@ -45,12 +46,17 @@
 
     setTimeout(() => {
         toastSuccess.style.opacity = '0';
-        toastError.style.opacity = '0';
         setTimeout(() => {
             toastSuccess.remove();
-            toastError.remove();
         }, 300);
     }, 3000); 
+
+    setTimeout(() => {
+        toastError.style.opacity = '0';
+        setTimeout(() => {
+            toastError.remove();
+        }, 300);
+    }, 5000);
 
 
 </script>
