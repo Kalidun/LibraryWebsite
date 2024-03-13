@@ -26,24 +26,22 @@ class LibraryController extends Controller
         try {
             $bookStock = BookStock::where('book_id', $request->book_id)->where('status_id', 1)->count();
             $userData = User::where('id', Auth::user()->id)->first();
-        // User maks borrowed 3 books at a day
-        // if last day borrowed != now reset borrowed count
+            //check last borrowed date
             if(date('Y-m-d', strtotime($userData->last_borrowed_date)) < date('Y-m-d')){
                 $userData->borrowed_count = 0;
             }
+            //check book stock
             if($bookStock == 0){
                 throw new Exception('Book Stock Not Available');
             }
+            //check borrowed count
             if($userData->borrowed_count >= 3){
-                throw new Exception('You can\'t borrow more than 3 books at a day');
+                throw new Exception("You can't borrow more than 3 books in one day.");
             }
-            
-        // Todo
-        // Update Status stock book
-        // Update User last_borrowed_date
-        // Update User borrowed_count
-        // Make table borrowedBook with user_id, book_id, date_borrowed, date_returned
-        
+            //check already borrowed
+            if(BorrowedBook::where('user_id', $userData->id)->where('book_id', $request->book_id)->exists()){
+                throw new Exception('You have already borrowed this book.');
+            }
             BookStock::where('book_id', $request->book_id)->where('status_id', 1)->first()->update([
                 'status_id' => 2,
             ]);

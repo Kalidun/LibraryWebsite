@@ -13,7 +13,7 @@
         @include('partials.sidebar')
     </aside>
 
-    <div class="p-4 lg:ml-64 mt-10 bg-teal-50">
+    <div class="p-2 lg:ml-64 mt-10 bg-teal-50">
         <div class="rounded-lg lg:p-4" style="min-height: 100vh;">
             @yield('section')
         </div>

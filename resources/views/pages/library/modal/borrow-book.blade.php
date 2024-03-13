@@ -12,7 +12,7 @@
             {{-- Content --}}
             <form action="{{ route('library.borrow') }}" class="w-full" enctype="multipart/form-data" method="POST"> 
                 @csrf
-                <div class="p-2 w-full flex flex-col">
+                <div class="p-2 w-full flex flex-col hidden">
                     <label for="book_id">Book ID</label>
                     <input type="number" name="book_id" id="book_id" class="rounded-xl p-1" required value="{{ $bookData->id }}" readonly>
                 </div>

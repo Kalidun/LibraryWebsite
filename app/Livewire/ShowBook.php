@@ -28,7 +28,7 @@ class ShowBook extends Component
                 $books = Book::where('category_id', $this->categories)->filter($this->search)->orderBy('id', 'DESC')->get();
             }
         }else{
-            $books = Book::all();
+            $books = Book::orderBy('id', 'DESC')->get();
         }
         return view('livewire.show-book', [
             'books' => $books,

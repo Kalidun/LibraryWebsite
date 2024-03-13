@@ -11,14 +11,11 @@
             placeholder="Search" wire:model="search" wire:input="updateSearch">
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">
-        @foreach ($books as $book)
+        @forelse ($books as $book)
             <a href="{{ route('library.show', $book->title) }}"
-                class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl hover:shadow-gray-6  00 shadow-xl hover:scale-105 transition duration-200 max-h-[19rem] hover:border-2 border-gray-300 shadow-gray-400">
-                <div id="title" class="flex justify-between">
+                class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl hover:shadow-gray-6  00 shadow-xl hover:scale-105 transition duration-200 max-h-[19rem] hover:border-2 border-gray-300 shadow-gray-400 {{ $bookStock->where('book_id', $book->id)->where('status_id', 1)->count() == 0 ? 'grayscale' : '' }}">
+                <div id="title" class="flex justify-between ">
                     <p class="capitalize font-bold mb-2">{{ $book->title }}</p>
-                    @if($bookStock->where('book_id', $book->id)->where('status_id', 1)->count() == 0)
-                    <p class="text-right text-red-500">Book Stock is not available</p>
-                    @endif
                 </div>
                 <div id="image" class="h-full flex justify-center">
                     @if ($book->image == null)
@@ -32,9 +29,8 @@
                     <p>by: {{ $book->author }}</p>
                 </div>
             </a>
-        @endforeach
-        @if ($books->count() == 0)
-            <p class="text-center">No Book Found</p>
-        @endif
+        @empty
+            <p class="w-full text-center col-span-5"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No Data</p>
+        @endforelse
     </div>
 </div>
