@@ -15,8 +15,8 @@
             </a>
         </li>
         <li>
-            <a href="#"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+            <a href="{{ route('borrowed.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('borrowed.*') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa-solid fa-book-bookmark"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">Borrowed Books</span>
             </a>

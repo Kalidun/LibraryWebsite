@@ -8,12 +8,12 @@
     </button>
 
     <aside id="sidebar-multi-level-sidebar"
-        class="fixed top-[3.25rem] left-0 z-50 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0"
+        class="fixed top-[3.25rem] left-0 z-50 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0 shadow"
         aria-label="Sidebar">
         @include('partials.sidebar')
     </aside>
 
-    <div class="p-2 lg:ml-64 mt-10 bg-teal-50">
+    <div class="p-2 lg:ml-64 pt-24 lg:pt-16 bg-teal-50">
         <div class="rounded-lg lg:p-4" style="min-height: 100vh;">
             @yield('section')
         </div>

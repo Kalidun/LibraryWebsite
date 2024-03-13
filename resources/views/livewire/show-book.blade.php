@@ -12,7 +12,7 @@
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">
         @forelse ($books as $book)
-            <a href="{{ route('library.show', $book->title) }}"
+            <a href="{{ route('library.show', $book->id) }}"
                 class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl hover:shadow-gray-6  00 shadow-xl hover:scale-105 transition duration-200 max-h-[19rem] hover:border-2 border-gray-300 shadow-gray-400 {{ $bookStock->where('book_id', $book->id)->where('status_id', 1)->count() == 0 ? 'grayscale' : '' }}">
                 <div id="title" class="flex justify-between ">
                     <p class="capitalize font-bold mb-2">{{ $book->title }}</p>

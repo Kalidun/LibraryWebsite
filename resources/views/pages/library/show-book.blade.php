@@ -5,7 +5,7 @@
     <div class="w-full">
         <div id="title" class="w-full text-center text-2xl flex justify-between">
             <a href="{{ route('library.index') }}"
-                class="text-black hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl ml-5">
+                class="text-black hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <p class="font-bold">{{ $bookData->title }}</p>
@@ -21,7 +21,7 @@
                             class="w-2/3 mx-auto h-auto rounded-xl">
                     @endif
                 </div>
-                <div id="info-group" class="flex flex-col gap-2 bg-teal-200 rounded-xl p-4 col-span-1 h-fit">
+                <div id="info-group" class="flex flex-col gap-2 bg-teal-200 rounded-xl p-4 col-span-1 h-fit shadow">
                     <div id="info" class="flex justify-between">
                         <p class="font-bold text-xl w-full text-center mb-2 ">{{ $bookData->title }}</p>
                     </div>
@@ -31,6 +31,10 @@
                     </div>
                     <div id="info" class="flex justify-between">
                         <span>Title</span>
+                        <span>{{ $bookData->title }}</span>
+                    </div>
+                    <div id="info" class="flex justify-between">
+                        <span>Category</span>
                         <span>{{ $bookData->category->name }}</span>
                     </div>
                     <div id="info" class="flex justify-between">

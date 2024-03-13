@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -21,6 +22,9 @@ class RegisterController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         // dd($validatedData);
         User::create($validatedData);
+        UserData::create([
+            'user_id' => User::latest()->first()->id
+        ]);
         return redirect('login')->with('success', 'Registration Successfull, Please Login!');
     }
 }

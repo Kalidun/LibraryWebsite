@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('borrowed_books', function (Blueprint $table) {
+        Schema::create('user_data', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('book_id');
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-            $table->boolean('is_returned')->default(0);
-            $table->date('borrow_date');
-            $table->date('return_date');
+            $table->string('name')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('gender')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('borrowed_books');
+        Schema::dropIfExists('user_data');
     }
 };

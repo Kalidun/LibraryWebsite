@@ -17,8 +17,8 @@ class LibraryController extends Controller
     public function index(){
         return view('pages.library.index');
     }
-    public function show($title){
-        $bookData = Book::where('title', $title)->first();
+    public function show($id){
+        $bookData = Book::where('id', $id)->first();
         $bookStock = BookStock::where('book_id', $bookData->id)->where('status_id', 1)->get();
         return view('pages.library.show-book', compact('bookData', 'bookStock'));
     }
@@ -39,7 +39,7 @@ class LibraryController extends Controller
                 throw new Exception("You can't borrow more than 3 books in one day.");
             }
             //check already borrowed
-            if(BorrowedBook::where('user_id', $userData->id)->where('book_id', $request->book_id)->exists()){
+            if(BorrowedBook::where('user_id', $userData->id)->where('book_id', $request->book_id)->where('is_returned', 0)->exists()){
                 throw new Exception('You have already borrowed this book.');
             }
             BookStock::where('book_id', $request->book_id)->where('status_id', 1)->first()->update([
@@ -58,6 +58,25 @@ class LibraryController extends Controller
             return redirect()->back()->with('success', 'Book Borrowed Successfully');
 
         } catch (\Throwable $th) {
+            return redirect()->back()->with('error', $th->getMessage());
+        }
+    }
+    public function returnBook(Request $request){
+        try{
+            // Todo
+            //1. Update Book Stock to Request Status
+            // 2. Update Borrowed Book is_returned to 1
+            // dd(BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->get());
+            BookStock::where('book_id', $request->book_id)->first()->update([
+                'status_id' => intval($request->status),
+            ]);
+            
+            BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->update([
+                'is_returned' => 1,
+            ]);
+
+            return redirect()->route('borrowed.index')->with('success', 'Book Returned Successfully');
+        }catch(\Throwable $th){
             return redirect()->back()->with('error', $th->getMessage());
         }
     }

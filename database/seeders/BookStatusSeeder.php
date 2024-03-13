@@ -23,7 +23,7 @@ class BookStatusSeeder extends Seeder
             'name' => 'Lost',
         ]);
         BookStatus::create([
-            'name' => 'Demaged',
+            'name' => 'Damaged',
         ]);
     }
 }
