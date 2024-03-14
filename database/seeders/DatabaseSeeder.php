@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             BookStatusSeeder::class,
             MainUserSeeder::class,
             UserDataSeeder::class,
+            GenderSeeder::class,
             // BookSeeder::class,
             // Book::factory(25)->create(),
             // BookStockSeeder::class,

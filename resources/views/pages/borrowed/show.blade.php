@@ -49,7 +49,7 @@
                             @else
                                 Days
                             @endif
-                            @if ($bookData->Borrow_date > $bookData->return_date)
+                            @if ($bookData->borrow_date > $bookData->return_date)
                                 Ago
                             @endif
                         </span>

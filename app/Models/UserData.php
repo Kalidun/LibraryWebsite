@@ -14,4 +14,7 @@ class UserData extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function genderUser(){
+        return $this->belongsTo(GenderUser::class);
+    }
 }

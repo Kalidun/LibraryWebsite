@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Borrowed\BorrowedController;
-use App\Http\Controllers\Data\Create\CreateController;
-use App\Http\Controllers\Data\ShowController;
-use App\Http\Controllers\Library\LibraryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Data\ShowController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Library\LibraryController;
+use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\Borrowed\BorrowedController;
+use App\Http\Controllers\Data\Create\CreateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,14 @@ Route::middleware('auth')->group(function () {
         Route::controller(BorrowedController::class)->group(function () {
             Route::get('/', 'index')->name('borrowed.index');
             Route::get('/{id}', 'show')->name('borrowed.show');
+        });
+    });
+    Route::prefix('profile')->group(function () {
+        Route::controller(ProfileController::class)->group(function () {
+            Route::get('/', 'index')->name('profile.index');
+            Route::post('/', 'updateProfile')->name('profile.update');
+            Route::post('/photo', 'updatePhoto')->name('profile.photo');
+            Route::post('/delete-photo', 'deletePhoto')->name('profile.delete-photo');
         });
     });
     Route::controller(LoginController::class)->group(function () {

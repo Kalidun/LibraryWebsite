@@ -29,8 +29,8 @@
             </a>
         </li>
         <li>
-            <a href="#"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75">
+            <a href="{{ route('profile.index') }}"
+                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('profile.index') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa fa-user"></i>
                 <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
             </a>

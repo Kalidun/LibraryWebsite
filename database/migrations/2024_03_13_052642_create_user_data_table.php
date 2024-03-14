@@ -18,8 +18,10 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
-            $table->string('gender')->nullable();
-            $table->date('date_of_birth')->nullable();
+            $table->unsignedBigInteger('gender_id')->nullable();
+            $table->foreign('gender_id')->references('id')->on('gender_users')->onDelete('cascade');
+            $table->string('image')->nullable();
+            $table->date('birthday')->nullable();
             $table->timestamps();
         });
     }
@@ -32,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('user_data');
     }
 };
+

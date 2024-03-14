@@ -20,7 +20,7 @@
                 </div>
                 <div id="description" class="text-center flex flex-wrap justify-between mt-3 gap-2">
                     <p>by: {{ $borrowedBook->book->author }}</p>
-                    <p class="text-red-500">{{ $borrowedBook->return_date }}</p>
+                    <p class="text-red-500">{{ $borrowedBook->book->return_date }}</p>
                 </div>
             </a>
             @empty
