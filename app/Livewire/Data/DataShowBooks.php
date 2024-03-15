@@ -6,12 +6,11 @@ use App\Models\Book;
 use Livewire\Component;
 use App\Models\BookStock;
 use App\Models\BookCategory;
-use Livewire\Attributes\Rule;
 
 class DataShowBooks extends Component
 {
-    public $search;
 
+    public $search;
     public function render()
     {
         $bookCategories = BookCategory::all();
@@ -21,6 +20,7 @@ class DataShowBooks extends Component
 
         return view('livewire.data.data-show-books', compact('bookCategories', 'books', 'bookStock', 'search'));
     }
+
     public function updateSearch()
     {
         $this->search;

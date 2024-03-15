@@ -12,7 +12,7 @@
                 <p class="text-xl font-bold">Add Book</p>
             </div>
             {{-- Content --}}
-            <form class="w-full" enctype="multipart/form-data" id="kt_modal_add_book_form">
+            <form class="w-full" action="{{ route('data.create.book') }}" enctype="multipart/form-data" id="kt_modal_add_book_form" method="POST">
                 @csrf
                 <div class="p-2 w-full flex flex-col">
                     <label for="title">Title</label>
@@ -60,28 +60,3 @@
     </div>
     <livewire:scripts />
 </div>
-<script>
-    $(document).ready(function() {
-        $("#kt_modal_add_book_form").submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: "{{ route('data.create.book') }}",
-                type: "POST",
-                data: new FormData(this),
-                processData: false,
-                contentType: false,
-                success: function(result) {
-                    $("#close-add-book-modal").click();
-                    if (result.success) {
-                        $('#kt_table_books').draw();
-                    } else {
-                        alert('Failed to add book: ' + result.error);
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.log(xhr.responseText);
-                }
-            })
-        })
-    })
-</script>

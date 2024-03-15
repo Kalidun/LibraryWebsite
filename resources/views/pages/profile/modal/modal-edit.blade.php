@@ -20,6 +20,11 @@
                         class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
                 </div>
                 <div class="p-2 w-full flex flex-col">
+                    <label for="email">Email</label>
+                    <input type="text" name="email" id="email" value="{{ Auth::user()->email }}"
+                        class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                </div>
+                <div class="p-2 w-full flex flex-col">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" value="{{ $userData->name }}"
                         class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">

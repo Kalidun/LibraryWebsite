@@ -23,6 +23,11 @@ class ProfileController extends Controller
                 'username' => $request->username
             ]);
         }
+        if($request->email){
+            User::where('id', auth()->user()->id)->update([
+                'email' => $request->email
+            ]);
+        }
         UserData::where('user_id', auth()->user()->id)->update([
             'name' => $request->name,
             'address' => $request->address,
@@ -39,7 +44,7 @@ class ProfileController extends Controller
             $request->validate([
                 'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             ]);
-            if ($request->photo) {
+            if ($request->photo ) {
                 if ($userData->image) {
                     unlink('storage/images/users/' . $userData->image);
                 }

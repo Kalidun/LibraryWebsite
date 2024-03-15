@@ -2,7 +2,7 @@
 
 @section('section')
     @include('pages.data.modal.modal-add-book')
-    @include('pages.data.modal.modal-add-category')
+    {{-- @include('pages.data.modal.modal-add-category') --}}
     <style>
         .tab {
             box-shadow: 1px 1px 1px 1px gray;

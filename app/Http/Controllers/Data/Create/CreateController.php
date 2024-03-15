@@ -55,11 +55,9 @@ class CreateController extends Controller
                     'status_id' => 1,
                 ]);
             }
-            session()->flash('success', 'Book created successfully');
-            return response()->json(['success' => true]);
+            return redirect()->back()->with('success', 'Book created successfully');
         } catch (\Exception $e) {
-            // return redirect()->back()->with('error', $e->getMessage());
-            return response()->json(['success' => false, 'error' => $e->getMessage()]);
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 }

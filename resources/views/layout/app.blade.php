@@ -24,27 +24,21 @@
             scroll-behavior: smooth;
         }
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
-    {{-- FlowBite Link --}}
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
-    {{-- Tailwind Link --}}
-    <script src="https://cdn.tailwindcss.com"></script>
-    {{-- Jquery Link --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+        crossorigin="anonymous"></script>
 </head>
 
 <body class="p-0 m-0 bg-teal-50 min-w-screen h-fit" style="min-height: 100vh;">
 
-    @include('partials.navbar')
     @include('partials.toast')
+    @include('partials.navbar')
     @yield('content')
 
     @include('partials.footer')
 
     @livewireScripts
-
-    {{-- Flowbite JS --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 
 </body>
 
