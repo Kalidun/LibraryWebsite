@@ -2,19 +2,40 @@
 
 namespace App\Http\Controllers\Data;
 
-use App\Models\BookCategory;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Models\BookStock;
+use App\Models\User;
+use App\Models\BookStatus;
+use App\Models\BookCategory;
+use App\Http\Controllers\Controller;
 
 class ShowController extends Controller
 {
-    public function index()
-    {
-        $bookCategories = BookCategory::all();
-        $books = Book::all();
-        $bookStock = BookStock::all();
-        return view('pages.data.index', compact('bookCategories', 'books', 'bookStock'));
+    public function bookPage(){
+        $dataBooks = Book::get();
+        $dataUser = User::get();
+        $dataCategory = BookCategory::get();
+        $dataStatus = BookStatus::get();
+        return view('pages.data.book', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus'));
+    }
+    public function catagoryPage(){
+        $dataBooks = Book::get();
+        $dataUser = User::get();
+        $dataCategory = BookCategory::get();
+        $dataStatus = BookStatus::get();
+        return view('pages.data.category', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus'));
+    }
+    public function statusPage(){
+        $dataBooks = Book::get();
+        $dataUser = User::get();
+        $dataCategory = BookCategory::get();
+        $dataStatus = BookStatus::get();
+        return view('pages.data.status', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus'));
+    }
+    public function userPage(){
+        $dataBooks = Book::get();
+        $dataUser = User::get();
+        $dataCategory = BookCategory::get();
+        $dataStatus = BookStatus::get();
+        return view('pages.data.user', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus'));
     }
 }

@@ -1,69 +1,61 @@
 @extends('layout.dashboard')
 
 @section('section')
-    @include('pages.data.modal.modal-add-book')
-    {{-- @include('pages.data.modal.modal-add-category') --}}
-    <style>
-        .tab {
-            box-shadow: 1px 1px 1px 1px gray;
-            transition: all 0.2s ease;
-        }
-        td{
-            border: 1px solid gray;
-        }
-        tr:hover{
-            background-color: rgb(204 251 241);
-        }
-    </style>
+<style>
+    tr:hover{
+        background-color: #9ffaff;
+    }
+    tr, th, td{
+        border: 1px solid black;
+    }
+</style>
     <div class="w-full">
         <div id="title">
             <p class="text-center font-bold text-3xl">Website Data</p>
         </div>
         <div id="body" class="mt-10 w-full mb-10">
-            <div class="w-full border border-gray-200 shadow rounded text-black">
-                <ul class="flex flex-wrap text-sm font-medium text-center gap-2" id="dataTab" role="tablist"
-                    data-tabs-toggle="#dataTabContent">
-                    <li>
-                        <button id="book-tab" data-tabs-target="#book" type="button" role="tab" aria-controls="book"
-                            aria-selected="true"
-                            class="tab inline-block p-3 px-5 hover:text-white hover:bg-teal-300 bg-teal-200 rounded font-bold">Books</button>
-                    </li>
-                    <li>
-                        <button id="categories-tab" data-tabs-target="#categories" type="button" role="tab"
-                            aria-controls="categories" aria-selected="false"
-                            class="tab inline-block p-3 px-5 hover:text-white hover:bg-teal-300 bg-teal-200 rounded font-bold">Category</button>
-                    </li>
-                    <li>
-                        <button id="status-tab" data-tabs-target="#status" type="button" role="tab"
-                            aria-controls="status" aria-selected="false"
-                            class="tab inline-block p-3 px-5 hover:text-white hover:bg-teal-300 bg-teal-200 rounded font-bold">Status</button>
-                    </li>
-                    <li>
-                        <button id="user-tab" data-tabs-target="#user" type="button" role="tab" aria-controls="user"
-                            aria-selected="false"
-                            class="tab inline-block p-3 px-5 hover:text-white hover:bg-teal-300 bg-teal-200 rounded font-bold">Users</button>
-                    </li>
-                </ul>
-                <div id="dataTabContent" class="mt-4 bg-teal-100">
-                    <div id="book" role="tabpanel" aria-labelledby="book-tab"
-                        class="p-2 hidden p-4 bg-white rounded-lg ">
-                        @livewire('data.data-show-books')
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full select-none">
+                <div class="w-full bg-blue-200 p-4 rounded-xl flex justify-between items-center border-2 border-blue-300 shadow shadow-blue-300"> 
+                    <div id="icon">
+                        <i class="fa-solid fa-book p-4 bg-blue-300 rounded-full"></i>
                     </div>
-                    <div id="categories" role="tabpanel" aria-labelledby="categories-tab"
-                        class="p-2 hidden p-4 bg-white rounded-lg">
-                        @livewire('data.data-show-categories')
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $dataBooks->count() }}</span>
+                        <span class="text-sm">Total Book</span>
                     </div>
-                    <div id="status" role="tabpanel" aria-labelledby="status-tab"
-                        class="p-2 hidden p-4 bg-white rounded-lg">
-                        @livewire('data.data-show-statuses')
+                    
+                </div>
+                <div class="w-full bg-green-200 p-4 rounded-xl flex justify-between items-center border-2 border-green-300 shadow shadow-green-300"> 
+                    <div id="icon">
+                        <i class="fa-solid fa-layer-group p-4 bg-green-300 rounded-full"></i>
                     </div>
-                    <div id="user" role="tabpanel" aria-labelledby="user-tab"
-                        class="p-2 hidden p-4 bg-white rounded-lg">
-                        @livewire('data.data-show-users')
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $dataCategory->count() }}</span>
+                        <span class="text-sm">Total Category</span>
+                    </div>
+                </div>
+                <div class="w-full bg-red-200 p-4 rounded-xl flex justify-between items-center border-2 border-red-300 shadow shadow-red-300"> 
+                    <div id="icon">
+                        <i class="fa-solid fa-chart-pie p-4 bg-red-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $dataStatus->count() }}</span>
+                        <span class="text-sm">Total Status</span>
+                    </div>
+                </div>
+                <div class="w-full bg-yellow-200 p-4 rounded-xl flex justify-between items-center border-2 border-yellow-300 shadow shadow-yellow-300">
+                    <div id="icon">
+                        <i class="fa-solid fa-user-group p-4 bg-yellow-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $dataUser->count() }}</span>
+                        <span class="text-sm">Total User</span>
                     </div>
                 </div>
             </div>
+            <div class="mt-5 w-full">
+                @yield('data')
+            </div>
         </div>
-
     </div>
 @endsection

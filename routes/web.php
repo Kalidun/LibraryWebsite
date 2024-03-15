@@ -34,12 +34,16 @@ Route::middleware('auth')->group(function () {
     });
     Route::prefix('data')->group(function () {
         Route::controller(ShowController::class)->group(function () {
-            Route::get('/', 'index')->name('data.index');
+            Route::get('/', 'bookPage')->name('data.bookPage');
+            Route::get('/category', 'catagoryPage')->name('data.catagoryPage');
+            Route::get('/status', 'statusPage')->name('data.statusPage');
+            Route::get('/user', 'userPage')->name('data.userPage');
         });
         Route::prefix('create')->group(function () {
             Route::controller(CreateController::class)->group(function () {
                 Route::post('/book', 'createBook')->name('data.create.book');
                 Route::post('/category', 'createCategory')->name('data.create.category');
+                Route::post('/status', 'createStatus')->name('data.create.status');
             });
         });
     });

@@ -15,25 +15,26 @@ class ShowBook extends Component
     public function render()
     {
         $bookCategories = BookCategory::all();
-        $books = [];
-        $bookStock = BookStock::all();
+
+        $books = Book::with(['stocks', 'category'])->orderBy('id', 'DESC');
+
         if($this->categories != 'All' || $this->search){
             if($this->categories != 'All' && $this->search == null){
-                $books = Book::where('category_id', $this->categories)->latest()->orderBy('id', 'DESC')->get();
+                $books = $books->where('category_id', $this->categories)->latest();
             }
             if($this->search  && $this->categories == 'All'){
-                $books = Book::filter($this->search)->orderBy('id', 'DESC')->get();
+                $books = $books->filter($this->search);
             }
             if($this->search && $this->categories != 'All'){
-                $books = Book::where('category_id', $this->categories)->filter($this->search)->orderBy('id', 'DESC')->get();
+                $books = $books->where('category_id', $this->categories)->filter($this->search);
             }
-        }else{
-            $books = Book::orderBy('id', 'DESC')->get();
         }
+
+        $books = $books->get();
+        
         return view('livewire.show-book', [
             'books' => $books,
             'bookCategories' => $bookCategories,
-            'bookStock' => $bookStock
         ]);
     }
     public function updateSearch()

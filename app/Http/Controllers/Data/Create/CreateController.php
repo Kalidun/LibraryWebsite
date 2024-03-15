@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Data\Create;
 
 use App\Models\Book;
 use App\Models\BookStock;
+use App\Models\BookStatus;
 use App\Models\BookCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -56,6 +57,19 @@ class CreateController extends Controller
                 ]);
             }
             return redirect()->back()->with('success', 'Book created successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function createStatus(Request $request){
+        try {
+            $request->validate([
+                'name' => 'required|unique:book_statuses,name',
+            ]);
+            BookStatus::create([
+                'name' => $request->name
+            ]);
+            return redirect()->back()->with('success', 'Status created successfully');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

@@ -22,11 +22,51 @@
             </a>
         </li>
         <li>
-            <a href="{{ route('data.index') }}"
-                class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('data.index') ? 'bg-teal-300 text-white' : '' }}">
-                <i class="fa-solid fa-plus"></i>
-                <span class="flex-1 ms-3 whitespace-nowrap">All Data</span>
-            </a>
+            <button type="button"
+                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
+                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                <i class="fa-solid fa-circle-plus text-black"></i>
+                <span class="flex-1 ms-3 text-black text-left">All Data</span>
+                <i class="fa-solid fa-chevron-down text-black"></i>
+            </button>
+            <ul id="dropdown-example" class="py-2 space-y-2 {{ request()->routeIs('data.*') ? '' : 'hidden' }}">
+                <li>
+                    <a href="{{ route('data.bookPage') }}"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.bookPage') ? 'bg-teal-300 text-white' : '' }}">
+                        <i class="fa-solid fa-book-medical"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            Book
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('data.catagoryPage') }}"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.catagoryPage') ? 'bg-teal-300 text-white' : '' }}">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            Category
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('data.statusPage') }}"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.statusPage') ? 'bg-teal-300 text-white' : '' }}">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            Status
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('data.userPage') }}"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.userPage') ? 'bg-teal-300 text-white' : '' }}">
+                        <i class="fa-solid fa-user-group"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            Users
+                        </span>
+                    </a>
+                </li>
+            </ul>
         </li>
         <li>
             <a href="{{ route('profile.index') }}"
@@ -63,32 +103,3 @@
         </li>
     </ul>
 </div>
-{{-- <li>
-    <button type="button"
-        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
-        aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
-        <i class="fa-solid fa-circle-plus text-black"></i>
-        <span class="flex-1 ms-3 text-black text-left">Create</span>
-        <i class="fa-solid fa-chevron-down text-black"></i>
-    </button>
-    <ul id="dropdown-example" class="hidden py-2 space-y-2">
-        <li>
-            <a href="#"
-                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
-                <i class="fa-solid fa-book-medical"></i>
-                <span class="flex-1 ms-3 whitespace-nowrap">
-                    Book
-                </span>
-            </a>
-        </li>
-        <li>
-            <a href="#"
-                class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white">
-                <i class="fa-solid fa-layer-group"></i>    
-                <span class="flex-1 ms-3 whitespace-nowrap">
-                    Category
-                </span>
-            </a>
-        </li>
-    </ul>
-</li> --}}

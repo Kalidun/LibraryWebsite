@@ -28,7 +28,7 @@
                     <label for="category">Category</label>
                     <select name="category" id="category" class="rounded-xl p-1" required>
                         <option value="" selected>Select Category</option>
-                        @foreach ($bookCategories as $bookCategory)
+                        @foreach ($dataCategory    as $bookCategory)
                             <option
                                 {{ old('category') == $bookCategory->id ? 'selected' : '' }}value="{{ $bookCategory->id }}">
                                 {{ $bookCategory->name }}</option>
