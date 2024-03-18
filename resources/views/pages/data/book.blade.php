@@ -2,6 +2,7 @@
 
 @section('data')
     @include('pages.data.modal.modal-add-book')
+    @include('pages.data.modal.modal-delete-book')
     <div>
         <div id="title">
             <p class="font-bold text-xl">Book Data</p>
@@ -9,11 +10,12 @@
         <div id="body">
             <div class="w-full flex justify-end">
                 <button
-                    class="p-2 bg-teal-200 rounded-xl hover:bg-teal-300 active:bg-teal-400 transition duration-100 active:scale-105" data-modal-target="add-book-modal" data-modal-toggle="add-book-modal">
+                    class="p-2 bg-teal-200 rounded-xl hover:bg-teal-300 active:bg-teal-400 transition duration-100 active:scale-105"
+                    data-modal-target="add-book-modal" data-modal-toggle="add-book-modal">
                     Add Book
                 </button>
             </div>
-            <div class="w-full mt-5">
+            <div class="w-full mt-5 max-w-full overflow-x-auto">
                 <table class="w-full">
                     <tr class="bg-teal-200 w-full">
                         <th>No</th>
@@ -35,14 +37,23 @@
                             <td class="text-center">
                                 <a href="#"><i class="fa-solid fa-eye"></i></a>
                                 <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#"><i class="fa-solid fa-trash"></i></a>
+                                <button type="button" class="text-red-500" data-modal-target="delete-book-modal"
+                                    data-modal-toggle="delete-book-modal" onclick="insertToInput({{ $book->id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         @empty
-                            <td colspan="7" class="text-center"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No Data</td>
+                            <td colspan="7" class="text-center"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No
+                                Data</td>
                         </tr>
                     @endforelse
                 </table>
             </div>
         </div>
     </div>
+    <script>
+        const inputBookId = document.getElementById('book_id');
+        function insertToInput(id) {
+            inputBookId.value = id
+            console.log(inputBookId.value)
+        }
+    </script>
 @endsection

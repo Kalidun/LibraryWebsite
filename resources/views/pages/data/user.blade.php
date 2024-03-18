@@ -12,7 +12,7 @@
                     Add Status
                 </button>
             </div> --}}
-            <div class="w-full mt-5">
+            <div class="w-full mt-5 max-w-full overflow-x-auto">
                 <table class="w-full">
                     <tr class="bg-teal-200 w-full">
                         <th>No</th>

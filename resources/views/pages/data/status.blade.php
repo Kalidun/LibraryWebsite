@@ -2,6 +2,7 @@
 
 @section('data')
     @include('pages.data.modal.modal-add-status')
+    @include('pages.data.modal.modal-delete-status')
     <div>
         <div id="title">
             <p class="font-bold text-xl">Status Data</p>
@@ -26,7 +27,7 @@
                             <td>{{ $status->name }}</td>
                             <td class="text-center">
                                 <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <a href="#"><i class="fa-solid fa-trash"></i></a>
+                                <button data-modal-target="delete-status-modal" data-modal-toggle="delete-status-modal" onclick="insertToInput({{ $status->id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         @empty
                             <td colspan="7" class="text-center"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No Data</td>
@@ -36,4 +37,11 @@
             </div>
         </div>
     </div>
+    <script>
+        const inputStatusId = document.getElementById('status_id');
+        function insertToInput(id) {
+            inputStatusId.value = id
+            console.log(inputStatusId.value)
+        }
+    </script>
 @endsection

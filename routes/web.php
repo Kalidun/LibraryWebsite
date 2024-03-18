@@ -8,6 +8,7 @@ use App\Http\Controllers\Library\LibraryController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Borrowed\BorrowedController;
 use App\Http\Controllers\Data\Create\CreateController;
+use App\Http\Controllers\Data\Delete\DeleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,13 @@ Route::middleware('auth')->group(function () {
                 Route::post('/book', 'createBook')->name('data.create.book');
                 Route::post('/category', 'createCategory')->name('data.create.category');
                 Route::post('/status', 'createStatus')->name('data.create.status');
+            });
+        });
+        Route::prefix('delete')->group(function () {
+            Route::controller(DeleteController::class)->group(function () {
+                Route::post('/book', 'deleteBook')->name('data.delete.book');
+                Route::post('/category', 'deleteCategory')->name('data.delete.category');
+                Route::post('/status', 'deleteStatus')->name('data.delete.status');
             });
         });
     });
