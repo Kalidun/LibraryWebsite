@@ -71,7 +71,7 @@
                 {{-- back button --}}
                 <button type="button"
                     class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
-                    data-modal-hide="delete-category-modal"" id="close-delete-category-modal"">X</button>
+                    data-modal-hide="delete-category-modal"" id="close-delete-category-modal">X</button>
                 <p class="text-xl font-bold">Are you sure you want to delete this category ?</p>
             </div>
             {{-- Content --}}

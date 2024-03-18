@@ -3,6 +3,7 @@
 @section('data')
     @include('pages.data.modal.modal-add-book')
     @include('pages.data.modal.modal-delete-book')
+    @include('pages.data.modal.modal-edit-book')
     <div>
         <div id="title">
             <p class="font-bold text-xl">Book Data</p>
@@ -36,7 +37,7 @@
                             <td>{{ $book->stocks()->where('book_id', $book->id)->where('status_id', '2')->count() }}</td>
                             <td class="text-center">
                                 <a href="#"><i class="fa-solid fa-eye"></i></a>
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button data-modal-target="edit-book-modal" data-modal-toggle="edit-book-modal" onclick="insertEditInput('{{ $book->id }}', '{{ $book->title }}', '{{ $book->author }}', '{{ $book->category->name }}', '{{ $book->stocks()->where('book_id', $book->id)->count() }}', '{{ $book->description }}')"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <button type="button" class="text-red-500" data-modal-target="delete-book-modal"
                                     data-modal-toggle="delete-book-modal" onclick="insertToInput({{ $book->id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
@@ -54,6 +55,15 @@
         function insertToInput(id) {
             inputBookId.value = id
             console.log(inputBookId.value)
+        }
+        function insertEditInput(bookId, bookTitle, bookAuthor, bookCategory, bookStock, bookDescription) {
+            document.getElementById('edit_book_id').value = bookId
+            console.log(bookId)
+            document.getElementById('edit_title').value = bookTitle
+            document.getElementById('edit_author').value = bookAuthor
+            document.getElementById('category').value = bookCategory
+            document.getElementById('edit_stock').value = bookStock
+            document.getElementById('edit_description').value = bookDescription
         }
     </script>
 @endsection

@@ -3,6 +3,7 @@
 @section('data')
     @include('pages.data.modal.modal-add-category')
     @include('pages.data.modal.modal-delete-category')
+    @include('pages.data.modal.modal-edit-category')
     <div>
         <div id="title">
             <p class="font-bold text-xl">Category Data</p>
@@ -28,7 +29,7 @@
                             <td>{{ $category->name }}</td>
                             <td class="text-center">{{ $dataBooks->where('category_id', $category->id)->count() }}</td>
                             <td class="text-center">
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button data-modal-target="edit-category-modal" data-modal-toggle="edit-category-modal" onclick="insertEditInput('{{ $category->id }}', '{{ $category->name }}')"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <button data-modal-target="delete-category-modal" data-modal-toggle="delete-category-modal" onclick="insertToInput({{ $category->id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         @empty
@@ -45,6 +46,11 @@
         function insertToInput(id) {
             console.log(id)
             inputId.value = id
+        }
+        function insertEditInput(id, name) {
+            console.log(id, name)
+            document.getElementById('edit_category_id').value = id
+            document.getElementById('category_name').value = name
         }
     </script>
 @endsection

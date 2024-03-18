@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Data\ShowController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Data\Edit\EditController;
 use App\Http\Controllers\Library\LibraryController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Borrowed\BorrowedController;
@@ -52,6 +53,13 @@ Route::middleware('auth')->group(function () {
                 Route::post('/book', 'deleteBook')->name('data.delete.book');
                 Route::post('/category', 'deleteCategory')->name('data.delete.category');
                 Route::post('/status', 'deleteStatus')->name('data.delete.status');
+            });
+        });
+        Route::prefix('update')->group(function () {
+            Route::controller(EditController::class)->group(function () {
+                Route::post('/book', 'editBook')->name('data.update.book');
+                Route::post('/category', 'editCategory')->name('data.update.category');
+                Route::post('/status', 'editStatus')->name('data.update.status');
             });
         });
     });

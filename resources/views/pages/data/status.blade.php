@@ -3,6 +3,7 @@
 @section('data')
     @include('pages.data.modal.modal-add-status')
     @include('pages.data.modal.modal-delete-status')
+    @include('pages.data.modal.modal-edit-status')
     <div>
         <div id="title">
             <p class="font-bold text-xl">Status Data</p>
@@ -26,7 +27,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $status->name }}</td>
                             <td class="text-center">
-                                <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <button data-modal-target="edit-status-modal" data-modal-toggle="edit-status-modal" onclick="insertEditInput('{{ $status->id }}', '{{ $status->name }}')"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <button data-modal-target="delete-status-modal" data-modal-toggle="delete-status-modal" onclick="insertToInput({{ $status->id }})"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         @empty
@@ -41,7 +42,10 @@
         const inputStatusId = document.getElementById('status_id');
         function insertToInput(id) {
             inputStatusId.value = id
-            console.log(inputStatusId.value)
+        }
+        function insertEditInput(id, name) {
+            document.getElementById('edit_status_id').value = id
+            document.getElementById('status_name').value = name
         }
     </script>
 @endsection
