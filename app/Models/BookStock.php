@@ -15,4 +15,10 @@ class BookStock extends Model
     {
         return $this->belongsTo(Book::class);
     }
+    public function status(){
+        return $this->belongsTo(BookStatus::class);
+    }
+    public function borrowedBooks(){
+        return $this->hasMany(BorrowedBook::class);
+    }
 }

@@ -9,7 +9,7 @@ class BorrowedBook extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'book_id', 'borrow_date', 'return_date', 'is_returned'];
+    protected $fillable = ['user_id', 'book_id', 'stock_id', 'borrow_date', 'return_date', 'is_returned'];
 
     public function book()
     {
@@ -19,5 +19,8 @@ class BorrowedBook extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function stock(){
+        return $this->belongsTo(BookStock::class);
     }
 }

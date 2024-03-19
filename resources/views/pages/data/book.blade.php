@@ -36,7 +36,7 @@
                             <td>{{ $book->stocks()->where('book_id', $book->id)->count() }}</td>
                             <td>{{ $book->stocks()->where('book_id', $book->id)->where('status_id', '2')->count() }}</td>
                             <td class="text-center">
-                                <a href="#"><i class="fa-solid fa-eye"></i></a>
+                                <a href="{{ route('data.show.book', $book->id) }}"><i class="fa-solid fa-eye"></i></a>
                                 <button data-modal-target="edit-book-modal" data-modal-toggle="edit-book-modal" onclick="insertEditInput('{{ $book->id }}', '{{ $book->title }}', '{{ $book->author }}', '{{ $book->category->name }}', '{{ $book->stocks()->where('book_id', $book->id)->count() }}', '{{ $book->description }}')"><i class="fa-solid fa-pen-to-square"></i></button>
                                 <button type="button" class="text-red-500" data-modal-target="delete-book-modal"
                                     data-modal-toggle="delete-book-modal" onclick="insertToInput({{ $book->id }})"><i class="fa-solid fa-trash"></i></button>

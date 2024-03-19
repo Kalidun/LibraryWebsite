@@ -16,11 +16,11 @@ class UserDataSeeder extends Seeder
         UserData::create([
             'user_id' => 1,
         ]);
-        UserData::create([
-            'user_id' => 2,
-        ]);
-        UserData::create([
-            'user_id' => 3,
-        ]);
+        // UserData::create([
+        //     'user_id' => 2,
+        // ]);
+        // UserData::create([
+        //     'user_id' => 3,
+        // ]);
     }
 }

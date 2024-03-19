@@ -24,6 +24,11 @@ class ProfileController extends Controller
             ]);
         }
         if($request->email){
+            if($request->email != auth()->user()->email){
+                $request->validate([
+                    'email' => 'required|email|unique:users',
+                ]);
+            }
             User::where('id', auth()->user()->id)->update([
                 'email' => $request->email
             ]);
@@ -42,7 +47,7 @@ class ProfileController extends Controller
         try {
             $userData = UserData::where('user_id', auth()->user()->id)->first();
             $request->validate([
-                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
             if ($request->photo ) {
                 if ($userData->image) {

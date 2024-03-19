@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Data\Show\ShowBookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Data\ShowController;
@@ -40,6 +41,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/category', 'catagoryPage')->name('data.catagoryPage');
             Route::get('/status', 'statusPage')->name('data.statusPage');
             Route::get('/user', 'userPage')->name('data.userPage');
+        });
+        Route::controller(ShowBookController::class)->group(function () {
+            Route::get('/book/{id}', 'show')->name('data.show.book');
         });
         Route::prefix('create')->group(function () {
             Route::controller(CreateController::class)->group(function () {

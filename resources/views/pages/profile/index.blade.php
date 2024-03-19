@@ -15,47 +15,65 @@
                         <label for="username">Username</label>
                         <input type="text" name="username" id="username" value="{{ Auth::user()->username }}" disabled
                             class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                        @error('username')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="username">Email</label>
                         <input type="text" name="email" id="email" value="{{ Auth::user()->email }}" disabled
                             class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                        @error('email')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="name">Name</label>
                         <input type="text" name="name" id="name" value="{{ $userData->name }}" disabled
                             class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                        @error('name')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="flex w-full gap-2">
-                        <div class="flex flex-col gap-1 w-2/5">
+                        <div class="flex flex-col gap-1 w-1/2">
                             <label for="phone">Phone Number</label>
                             <input type="text" name="phone" id="phone" value="{{ $userData->phone }}" disabled
                                 class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
-                        </div>
-                        <div class="flex flex-col gap-1 w-2/5">
+                            @error('phone')
+                                <p class="text-red-500">{{ $message }}</p>
+                            @enderror
+                            </div>
+                        <div class="flex flex-col gap-1 w-1/2">
                             <label for="birthday">Date of Birth</label>
                             <input type="date" name="birthday" id="birthday" value="{{ $userData->birthday }}" disabled
                                 class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                            @error('birthday')
+                                <p class="text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
-                        <div class="flex flex-col gap-1 w-1/5">
-                            <label for="gender">Gender</label>
-                            <select name="gender" id="gender"
-                                class="rounded-xl p-2 hover:bg-teal-100 transition duration-75" disabled>
-                                @if ($userData->gender_id == null)
-                                    <option value="" selected>Select Gender</option>
-                                @endif
-                                @foreach ($genders as $gender)
-                                    <option value="{{ $gender->id }}"
-                                        {{ $userData->gender_id == $gender->id ? 'selected' : '' }}>{{ $gender->gender }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <label for="gender">Gender</label>
+                        <select name="gender" id="gender"
+                            class="rounded-xl p-2 hover:bg-teal-100 transition duration-75" disabled>
+                            @if ($userData->gender_id == null)
+                                <option value="" selected>Select Gender</option>
+                            @endif
+                            @foreach ($genders as $gender)
+                                <option value="{{ $gender->id }}"
+                                    {{ $userData->gender_id == $gender->id ? 'selected' : '' }}>{{ $gender->gender }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="flex flex-col gap-1">
                         <label for="address">Address</label>
                         <input type="text" name="address" id="address" value="{{ $userData->address }}" disabled
                             class="p-2 hover:bg-teal-100 transition duration-75 rounded-xl">
+                        @error('address')
+                            <p class="text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="flex flex-col gap-1 w-1/5">
                         <button type="button" data-modal-target="edit-profil-modal" data-modal-toggle="edit-profil-modal"

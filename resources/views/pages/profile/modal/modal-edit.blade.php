@@ -40,19 +40,19 @@
                         <input type="date" name="birthday" id="birthday" value="{{ $userData->birthday }}"
                             class=" hover:bg-teal-100 transition duration-75 rounded-xl">
                     </div>
-                    <div class=" w-full flex flex-col">
-                        <label for="gender">Gender</label>
-                        <select name="gender" id="gender" class="rounded-xl p-1">
-                            @if ($userData->gender_id == null)
-                                <option value="" selected>Select Gender</option>
-                            @endif
-                            @foreach ($genders as $gender)
-                                <option value="{{ $gender->id }}"
-                                    {{ $userData->gender_id == $gender->id ? 'selected' : '' }}>{{ $gender->gender }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
+                </div>
+                <div class=" w-full flex flex-col p-2">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender" class="rounded-xl p-1">
+                        @if ($userData->gender_id == null)
+                            <option value="" selected>Select Gender</option>
+                        @endif
+                        @foreach ($genders as $gender)
+                            <option value="{{ $gender->id }}"
+                                {{ $userData->gender_id == $gender->id ? 'selected' : '' }}>{{ $gender->gender }}
+                            </option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="p-2 w-full flex flex-col">
                     <label for="address">Address</label>

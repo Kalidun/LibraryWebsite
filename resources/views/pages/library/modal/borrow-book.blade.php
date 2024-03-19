@@ -12,13 +12,13 @@
             {{-- Content --}}
             <form action="{{ route('library.borrow') }}" class="w-full" enctype="multipart/form-data" method="POST"> 
                 @csrf
-                <div class="p-2 w-full flex flex-col hidden">
+                <div class="p-2 w-full hidden">
                     <label for="book_id">Book ID</label>
                     <input type="number" name="book_id" id="book_id" class="rounded-xl p-1" required value="{{ $bookData->id }}" readonly>
                 </div>
                 <div class="p-2 w-full flex flex-col">
                     <label for="return_date">Return Date</label>
-                    <input type="date" name="return_date" id="return_date" class="rounded-xl p-1" required value="{{ old('return_date') }}" autofocus>
+                    <input type="date" name="return_date" id="return_date" class="rounded-xl p-1" required value="{{ old('return_date') }}" autofocus min="{{ date('Y-m-d') }}">
                 </div>
                 <div class="p-2 w-full">
                     <button type="submit" class="bg-teal-500 text-white px-2 py-1 rounded hover:bg-teal-400 active:bg-teal-600 transition duration-200">

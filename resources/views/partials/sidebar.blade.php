@@ -24,15 +24,15 @@
         <li>
             <button type="button"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
-                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
+                aria-controls="dropdown-example" data-collapse-toggle="dropdown-example" onclick="toggleDropdown()">
                 <i class="fa-solid fa-circle-plus text-black"></i>
                 <span class="flex-1 ms-3 text-black text-left">All Data</span>
-                <i class="fa-solid fa-chevron-down text-black"></i>
+                <i class="fa-solid fa-chevron-down text-black transition duration-75 {{ request()->routeIs('data.*') ? 'rotate-180' : '' }}" id="dropdownButtonIcon"></i>
             </button>
-            <ul id="dropdown-example" class="py-2 space-y-2 {{ request()->routeIs('data.*') ? '' : 'hidden' }}">
+            <ul id="dropdown-example" class="py-2 space-y-2 {{ request()->routeIs('data.*') ? '' : 'hidden' }} bg-teal-200 rounded-xl">
                 <li>
                     <a href="{{ route('data.bookPage') }}"
-                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.bookPage') ? 'bg-teal-300 text-white' : '' }}">
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.bookPage') || request()->routeIs('data.show.book') ? 'bg-teal-300 text-white' : '' }}">
                         <i class="fa-solid fa-book-medical"></i>
                         <span class="flex-1 ms-3 whitespace-nowrap">
                             Book
@@ -102,4 +102,14 @@
             </form>
         </li>
     </ul>
+    <script>
+        const dropdownIcon = document.getElementById('dropdownButtonIcon');
+        function toggleDropdown() {
+            if(dropdownIcon.classList.contains('rotate-180')) {
+                dropdownIcon.classList.remove('rotate-180');
+            }else {
+                dropdownIcon.classList.add('rotate-180');
+            }
+        }
+    </script>
 </div>

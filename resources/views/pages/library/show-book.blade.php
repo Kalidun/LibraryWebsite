@@ -44,7 +44,7 @@
                     <div id="info" class="flex justify-start mt-5">
                         @if($bookStock->where('book_id', $bookData->id)->count() > 0)
                         <button
-                            class="bg-teal-400 p-2 rounded-xl text-white bg-teal-400 active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500" data-modal-target="borrow-book-modal" data-modal-toggle="borrow-book-modal">
+                            class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500" data-modal-target="borrow-book-modal" data-modal-toggle="borrow-book-modal">
                             <i class="fa-solid fa-book"></i>
                             Borrow
                         </button>

@@ -24,7 +24,11 @@
             scroll-behavior: smooth;
         }
     </style>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/app-8ba6dfe1.css') }}">
+    <script src="{{ asset('js/app-794b5d55.js') }}"></script> --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css">
     @livewireStyles
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
         crossorigin="anonymous"></script>
@@ -39,7 +43,7 @@
     @include('partials.footer')
 
     @livewireScripts
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </body>
 
 </html>

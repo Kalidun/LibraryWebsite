@@ -18,15 +18,15 @@ class MainUserSeeder extends Seeder
             'email' => 'superadmin@gmail.com',
             'password' => bcrypt('12345678'),
         ]);
-        User::create([
-            'username' => 'Gaga',
-            'email' => 'gaga@gmail.com',
-            'password' => bcrypt('12345678'),
-        ]);
-        User::create([
-            'username' => 'Gugu',
-            'email' => 'gugu@gmail.com',
-            'password' => bcrypt('12345678'),
-        ]);
+        // User::create([
+        //     'username' => 'Gaga',
+        //     'email' => 'gaga@gmail.com',
+        //     'password' => bcrypt('12345678'),
+        // ]);
+        // User::create([
+        //     'username' => 'Gugu',
+        //     'email' => 'gugu@gmail.com',
+        //     'password' => bcrypt('12345678'),
+        // ]);
     }
 }
