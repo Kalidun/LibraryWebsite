@@ -2,16 +2,16 @@
 
 @section('section')
     @include('pages.borrowed.modal.modal-return-book')
-    <div class="w-full">
-        <div id="title" class="w-full text-center text-2xl flex justify-between">
+    <div class="w-full pt-2">
+        <div id="title" class="w-full text-center text-2xl flex justify-between pt-8 lg:pt-0">
             <a href="{{ route('borrowed.index') }}"
-                class="text-black hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
+                class="text-black sm:hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <p class="font-bold">{{ $bookData->book->title }}</p>
             <p class="text-sm">by : {{ $bookData->book->author }}</p>
         </div>
-        <div id="body" class="mt-8">
+        <div id="body" class="mt-8 p-2">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div id="image" class="col-span-1 sm:col-span-2">
                     @if ($bookData->book->image == null)
@@ -54,7 +54,7 @@
                             @endif
                         </span>
                     </div>
-                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/3 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90" data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
+                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/2 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90" data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
                         Send Back
                     </button>
                 </div>

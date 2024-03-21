@@ -2,7 +2,7 @@
 {{-- @extends('layout.app') --}}
 
 @section('section')
-    <div class="w-full">
+    <div class="w-full p-8">
         <div id="title">
             <p class="text-center font-bold text-3xl">Home</p>
         </div>

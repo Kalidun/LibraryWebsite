@@ -13,12 +13,10 @@ class LoginController extends Controller
     }
 
     public function authenticate(Request $request){
-        // dd($request);
         $credentials = $request->validate([
             'email' => 'required|max:255|email:dns',
             'password' => 'required|min:5|max:255',
         ]);
-        // dd($credentials);
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
             return redirect('/')->with('success', 'Login Successfull!');

@@ -1,13 +1,13 @@
 <div id="body" class="mt-10">
     <div class="seach-bar w-full flex justify-center gap-5">
-        <select name="#" id="category" class="border border-black p-1 rounded-xl w-1/4" wire:model="categories"
+        <select name="#" id="category" class="border border-black p-1 rounded-xl w-1/3 sm:w-1/4" wire:model="categories"
             wire:change="updateCategory">
             <option value="All" selected>All</option>
             @foreach ($bookCategories as $category)
                 <option value="{{ $category->id }}">{{ $category->name }}</option>
             @endforeach
         </select>
-        <input type="text" name="#" id="search" class="border border-black p-1 rounded-xl w-1/3"
+        <input type="text" name="#" id="search" class="border border-black p-1 rounded-xl w-2/4 sm:w-1/3"
             placeholder="Search" wire:model="search" wire:input="updateSearch">
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 mt-5">

@@ -78,22 +78,22 @@ class LibraryController extends Controller
         // dd(BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->get());
 
         // Get Stock iD
-        $stockId = BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->stock_id;
-        BookStock::where('id', $stockId)->where('status_id', 2)->first()->update([
-            'status_id' => $request->status,
-        ]);
-        $borrowedBook = BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first();
-        if($request->status == 1){
-            BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->update([
-                'is_returned' => 1
-            ]);
-            return redirect()->route('borrowed.index')->with('success', 'Book Returned Successfully');
-        }else {
-            BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->update([
-                'is_returned' => 0
-            ]);
-            return redirect()->route('borrowed.index')->with('message', 'Book Successfully Reported');
-        }
+        // $stockId = BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->stock_id;
+        // BookStock::where('id', $stockId)->where('status_id', 2)->first()->update([
+        //     'status_id' => $request->status,
+        // ]);
+        // $borrowedBook = BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first();
+        // if($request->status == 1){
+        //     BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->update([
+        //         'is_returned' => 1
+        //     ]);
+        //     return redirect()->route('borrowed.index')->with('success', 'Book Returned Successfully');
+        // }else {
+        //     BorrowedBook::where('book_id', $request->book_id)->where('user_id', Auth::user()->id)->first()->update([
+        //         'is_returned' => 0
+        //     ]);
+        //     return redirect()->route('borrowed.index')->with('message', 'Book Successfully Reported');
+        // }
         }catch(\Throwable $th){
             return redirect()->back()->with('error', $th->getMessage());
         }

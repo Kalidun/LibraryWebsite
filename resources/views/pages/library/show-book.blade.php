@@ -2,16 +2,16 @@
 
 @section('section')
 @include('pages.library.modal.borrow-book')
-    <div class="w-full">
-        <div id="title" class="w-full text-center text-2xl flex justify-between">
+    <div class="w-full pt-2">
+        <div id="title" class="w-full text-center text-2xl flex justify-between p-4 pt-8 lg:pt-0">
             <a href="{{ route('library.index') }}"
-                class="text-black hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
+                class="text-black sm:hover:bg-teal-400 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
                 <i class="fas fa-arrow-left"></i>
             </a>
             <p class="font-bold">{{ $bookData->title }}</p>
             <p class="text-sm">by : {{ $bookData->author }}</p>
         </div>
-        <div id="body" class="mt-8">
+        <div id="body" class="mt-8 p-4">
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div id="image" class="col-span-1 sm:col-span-2">
                     @if ($bookData->image == null)
@@ -28,10 +28,6 @@
                     <div id="info" class="flex justify-between">
                         <span>Author</span>
                         <span>{{ $bookData->author }}</span>
-                    </div>
-                    <div id="info" class="flex justify-between">
-                        <span>Title</span>
-                        <span>{{ $bookData->title }}</span>
                     </div>
                     <div id="info" class="flex justify-between">
                         <span>Category</span>

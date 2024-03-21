@@ -16,7 +16,7 @@
             background-color: #7aecdb;
         }
     </style>
-    <div class="w-full">
+    <div class="w-full p-8">
         <div id="title" class="w-full text-center text-2xl flex justify-between">
             <a href="{{ route('data.bookPage') }}"
                 class="text-black hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">

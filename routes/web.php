@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\Data\Show\ShowBookController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Data\ShowController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Data\Edit\EditController;
@@ -11,6 +11,7 @@ use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Borrowed\BorrowedController;
 use App\Http\Controllers\Data\Create\CreateController;
 use App\Http\Controllers\Data\Delete\DeleteController;
+use App\Http\Controllers\Data\Show\ShowBookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/', 'updateProfile')->name('profile.update');
             Route::post('/photo', 'updatePhoto')->name('profile.photo');
             Route::post('/delete-photo', 'deletePhoto')->name('profile.delete-photo');
+        });
+    });
+    Route::prefix('chat')->group(function () {
+        Route::controller(ChatController::class)->group(function () {
+            Route::get('/', 'chatPage')->name('chat.index');
+            Route::get('/request', 'requestPage')->name('request.index');
         });
     });
     Route::controller(LoginController::class)->group(function () {

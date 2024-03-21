@@ -19,8 +19,8 @@ class RegisterController extends Controller
             'email' => 'required|max:255|email:dns|unique:users',
             'password' => 'required|min:5|max:255',
         ]);
-        $validatedData['password'] = Hash::make($validatedData['password']);
-        // dd($validatedData);
+        // change to bycrype
+        $validatedData['password'] = bcrypt($validatedData['password']); 
         User::create($validatedData);
         UserData::create([
             'user_id' => User::latest()->first()->id
