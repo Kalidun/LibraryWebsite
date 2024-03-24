@@ -108,6 +108,11 @@
         const dropdownIcon = document.getElementById('dropdownButtonIcon');
 
         function toggleDropdown() {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Operation completed successfully!',
+            })
             if (dropdownIcon.classList.contains('rotate-180')) {
                 dropdownIcon.classList.remove('rotate-180');
             } else {

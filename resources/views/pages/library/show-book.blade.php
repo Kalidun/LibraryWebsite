@@ -1,8 +1,8 @@
 @extends('layout.dashboard')
 
 @section('section')
-@include('pages.library.modal.borrow-book')
-    <div class="w-full pt-2">
+    @include('pages.library.modal.borrow-book')
+    <div class="w-full pt-2 min-h-svh">
         <div id="title" class="w-full text-center text-2xl flex justify-between p-4 pt-8 lg:pt-0">
             <a href="{{ route('library.index') }}"
                 class="text-black sm:hover:bg-teal-400 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
@@ -38,14 +38,18 @@
                         <span class="font-bold">{{ $bookStock->where('book_id', $bookData->id)->count() }}</span>
                     </div>
                     <div id="info" class="flex justify-start mt-5">
-                        @if($bookStock->where('book_id', $bookData->id)->count() > 0)
-                        <button
-                            class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500" data-modal-target="borrow-book-modal" data-modal-toggle="borrow-book-modal">
-                            <i class="fa-solid fa-book"></i>
-                            Borrow
-                        </button>
+                        @if ($bookStock->where('book_id', $bookData->id)->count() > 0)
+                            <button id="borrow-button"
+                                class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500"
+                                data-modal-target="borrow-book-modal" data-modal-toggle="borrow-book-modal"
+                                data-bookid="{{ $bookData->id }}">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-book"></i>
+                                    <span>Borrow</span>
+                                </div>
+                            </button>
                         @else
-                        <p class="text-red-500 font-bold text-xl w-full text-center">Out of Stock</p>
+                            <p class="text-red-500 font-bold text-xl w-full text-center">Out of Stock</p>
                         @endif
                     </div>
                 </div>
@@ -58,4 +62,30 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#borrow-button').on('click', function() {
+                $.ajax({
+                    url: "{{ route('library.QrCode', $bookData->id) }}",
+                    type: 'GET',
+                    success: function(data, textStatus, xhr) {
+                        if (xhr.status === 200) {
+                            console.log(data);
+                            $('#qr').html(data);
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            toastr.error(xhr.responseJSON.error);
+                        } else {
+                            toastr.error(error);
+                        }
+                        $('#close').click();
+                    }
+                });
+            });
+        });
+    </script>
 @endsection

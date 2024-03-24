@@ -35,10 +35,37 @@
                     </div>
                 @endforelse
             </div>
-            <div class="p-6 mt-[2.5rem] h-full">
+            <div 
+            x-init="window.scrollTo(0,document.body.scrollHeight)"
+            class="p-6 mt-[2.5rem] h-full">
                 @forelse($chatMessage as $message)
-                    <div>{{ $message->message }}</div>
-                    <div class="fixed bottom-2 w-[95%] xl:w-[68%]">
+                    {{-- <div>{{ $message->message }}</div> --}}
+                    @if ($message->user_id == Auth::user()->id)
+                        <div class="w-full flex justify-end mb-2">
+                            <div class="w-3/4 p-2 bg-teal-300 rounded-3xl text-black text-right flex flex-col">
+                                <div>
+                                    {{ $message->message }}
+                                </div>
+                                <span class="text-xs">
+                                    {{ $message->created_at->diffForHumans() }}
+                                </span>
+                            </div>
+                            <div>
+                            </div>
+                        </div>
+                    @else
+                        <div class="w-full flex justify-start mb-2">
+                            <div class="w-3/4 p-2 bg-teal-200 rounded-3xl text-black text-left flex flex-col">
+                                <div>
+                                    {{ $message->message }}
+                                </div>
+                                <span class="text-xs">
+                                    {{ $message->created_at->diffForHumans() }}
+                                </span>
+                            </div>
+                        </div>
+                    @endif
+                    <div class="fixed bottom-2 w-[95%] xl:w-[65%]">
                         <form method="POST" wire:submit.prevent="sendChatMessage" class="flex gap-4">
                             <input type="text" placeholder="Type Message"
                                 class="w-full p-1 border-b-2 bg-white rounded-xl" name="message" wire:model="message">
@@ -51,7 +78,7 @@
                         </p>
                     @else
                         <p class="w-full text-center col-span-5"><i class="fa-regular fa-hand mx-1"></i>Chat User</p>
-                        <div class="fixed bottom-2 w-[95%] xl:w-[68%]">
+                        <div class="fixed bottom-2 w-[95%] xl:w-[65%]">
                             <form method="POST" wire:submit.prevent="sendChatMessage" class="flex gap-4">
                                 <input type="text" placeholder="Type Message"
                                     class="w-full p-1 border-b-2 bg-white rounded-xl" name="message"

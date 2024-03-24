@@ -40,6 +40,7 @@ class ChatPage extends Component
     public function resetChatData()
     {
         $this->chat = [];
+        $this->chatMessage = [];
     }
     public function getChatMessage($id){
         $chatMessage = ChatMessage::where('chat_id', $id)->get();

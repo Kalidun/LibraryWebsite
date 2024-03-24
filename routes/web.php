@@ -33,7 +33,8 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('library.index');
             Route::get('/{title}', 'show')->name('library.show');
             Route::post('/borrow', 'borrow')->name('library.borrow');
-            Route::post('/return', 'returnBook')->name('library.return');
+            Route::get('/QrCode/{id}', 'generateQRToBorrow')->name('library.QrCode');
+            Route::post('/return', 'generateQRToReturn')->name('library.return');
         });
     });
     Route::prefix('data')->group(function () {
@@ -92,5 +93,6 @@ Route::middleware('auth')->group(function () {
         Route::post('logout', 'logout')->name('logout');
     });
 });
-
+Route::get('/borrow/{bookId}/{stockId}/{userId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
+Route::get('/return/{stockId}/{borrowedId}/{statusId}/{userId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
 require __DIR__ . '/auth.php';

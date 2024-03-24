@@ -10,11 +10,15 @@
                 <p class="text-xl font-bold">Borrow Book</p>
             </div>
             {{-- Content --}}
-            <form action="{{ route('library.return') }}" class="w-full" enctype="multipart/form-data" method="POST"> 
+            <form action="{{ route('library.return') }}" class="w-full" method="POST" id="return-book-form"> 
                 @csrf
                 <div class="p-2 w-full hidden">
-                    <label for="book_id">Book ID</label>
-                    <input type="number" name="book_id" id="book_id" class="rounded-xl p-1" required value="{{ $bookData->book_id }}" readonly>
+                    <label for="stock_id">Stock ID</label>
+                    <input type="number" name="stock_id" id="stock_id" class="rounded-xl p-1" required value="{{ $bookData->stock_id }}" readonly>
+                </div>
+                <div class="p-2 w-full hidden">
+                    <label for="book_id">Borrowed Id</label>
+                    <input type="number" name="borrowed_id" id="borrowed_id" class="rounded-xl p-1" required value="{{ $bookData->id }}" readonly>
                 </div>
                 <div class="p-2 w-full flex flex-col">
                     <label for="book_id">Status</label>
@@ -25,7 +29,7 @@
                         @endforeach
                     </select>
                 </div>                                                      
-                <div class="p-2 w-full">
+                <div class="p-2 w-full" id="buttonSubmit">
                     <button type="submit" class="bg-teal-500 text-white px-2 py-1 rounded hover:bg-teal-400 active:bg-teal-600 transition duration-200">
                         <p class="text-xl font-bold">Send</p>
                     </button>
@@ -34,3 +38,26 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function () {
+        $('#return-book-form').submit(function (e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+
+            $.ajax({
+                url: "{{ route('library.return') }}",
+                type: 'POST',
+                data: data,
+                success: function (response) {
+                    $('#status').attr('disabled', true)
+                    $('#buttonSubmit').html(response)
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseJSON.error);
+                    toastr.error(xhr.responseJSON.error);
+                }
+            })
+        })
+    })
+</script>

@@ -9,7 +9,7 @@
         border: 1px solid black;
     }
 </style>
-    <div class="w-full p-8">
+    <div class="w-full p-8 min-h-svh">
         <div id="title">
             <p class="text-center font-bold text-3xl">Website Data</p>
         </div>

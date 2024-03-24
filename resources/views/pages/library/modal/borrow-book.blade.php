@@ -6,26 +6,16 @@
             {{-- Header --}}
             <div class="flex justify-between items-start p-4 rounded-t border-b">
                 {{-- back button --}}
-                <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="borrow-book-modal">X</button>
+                <button id="close" type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="borrow-book-modal">X</button>
                 <p class="text-xl font-bold">Borrow Book</p>
             </div>
             {{-- Content --}}
-            <form action="{{ route('library.borrow') }}" class="w-full" enctype="multipart/form-data" method="POST"> 
-                @csrf
-                <div class="p-2 w-full hidden">
-                    <label for="book_id">Book ID</label>
-                    <input type="number" name="book_id" id="book_id" class="rounded-xl p-1" required value="{{ $bookData->id }}" readonly>
+            <div class="p-4">
+                <div class="text-center">Scan Qr to borrow book</div>
+                <div id="qr" class="flex justify-center">
+                    
                 </div>
-                <div class="p-2 w-full flex flex-col">
-                    <label for="return_date">Return Date</label>
-                    <input type="date" name="return_date" id="return_date" class="rounded-xl p-1" required value="{{ old('return_date') }}" autofocus min="{{ date('Y-m-d') }}">
-                </div>
-                <div class="p-2 w-full">
-                    <button type="submit" class="bg-teal-500 text-white px-2 py-1 rounded hover:bg-teal-400 active:bg-teal-600 transition duration-200">
-                        <p class="text-xl font-bold">Add</p>
-                    </button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

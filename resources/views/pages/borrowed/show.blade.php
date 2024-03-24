@@ -2,7 +2,7 @@
 
 @section('section')
     @include('pages.borrowed.modal.modal-return-book')
-    <div class="w-full pt-2">
+    <div class="w-full pt-2 min-h-svh">
         <div id="title" class="w-full text-center text-2xl flex justify-between pt-8 lg:pt-0">
             <a href="{{ route('borrowed.index') }}"
                 class="text-black sm:hover:bg-teal-400 w-10 text-center font-bold transition duration-100 rounded-xl p-1 text-xl">
@@ -35,28 +35,23 @@
                     </div>
                     <div id="info" class="flex justify-between">
                         <span>Borrowed Date</span>
-                        <span>{{ $bookData->borrow_date }}</span>
+                        <span>{{ $bookData->created_at->diffForHumans() }}</span>
                     </div>
-                    <div id="info" class="flex justify-between">
-                        <span>Return Date</span>
-                        <span>{{ $bookData->return_date }}</span>
+                    @if ($bookData->is_returned == 0)
+                        <button
+                            class="bg-teal-400 p-1 rounded-xl text-white w-1/2 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90"
+                            data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
+                            Send Back
+                        </button>
+                    @else
+                        <div class="flex justify-center select-none">
+                            <div class="text-center font-bold text-black border border-black rounded-xl p-1 w-1/2">Returned
+                            </div>
+                        </div>
+                    @endif
+                    <div id="qr">
+
                     </div>
-                    <div id="info" class="flex justify-between">
-                        <span>Deadline</span>
-                        <span>{{ $deadline }}
-                            @if ($deadline == 1)
-                                Day
-                            @else
-                                Days
-                            @endif
-                            @if ($bookData->borrow_date > $bookData->return_date)
-                                Ago
-                            @endif
-                        </span>
-                    </div>
-                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/2 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90" data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
-                        Send Back
-                    </button>
                 </div>
                 <div id="description" class="flex flex-col">
                     <p class="font-bold">Description</p>

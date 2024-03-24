@@ -26,8 +26,8 @@
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/app-dccd3223.css') }}">
-    <script src="{{ asset('js/app-794b5d55.js') }}"></script> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('css/app-ab2b65e9.css') }}"> --}}
+    {{-- <script src="{{ asset('js/app-794b5d55.js') }}"></script> --}}
 
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"> --}}
@@ -38,17 +38,22 @@
 
 <body class="p-0 m-0 bg-teal-50 min-w-screen h-fit" style="min-height: 100vh;">
 
-    @include('partials.toast')
     @include('partials.navbar')
     @yield('content')
 
     @if (Request::routeIs('chat.index'))
-
     @else
         @include('partials.footer')
     @endif
-        @livewireScripts
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
+    @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"
+        integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+        integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @include('partials.toast')
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
 </body>
 
 </html>
