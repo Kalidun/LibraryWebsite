@@ -28,7 +28,7 @@
                 <span class="flex-1 ms-3 whitespace-nowrap">Profile</span>
             </a>
         </li>
-        <li>
+        {{-- <li>
             <a href="{{ route('request.index') }}"
                 class="flex items-center p-2 group rounded-lg hover:bg-teal-300 hover:text-white transition duration-75 {{ request()->routeIs('request.*') ? 'bg-teal-300 text-white' : '' }}">
                 <i class="fa-solid fa-comment-dots"></i>
@@ -36,7 +36,8 @@
                     Request Book
                 </span>
             </a>
-        </li>
+        </li> --}}
+        @if(Auth::user()->role == 'admin')
         <li>
             <button type="button"
                 class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg group text-base hover:bg-teal-300 hover:text-white"
@@ -93,6 +94,7 @@
                 <span class="flex-1 ms-3 whitespace-nowrap">Chat</span>
             </a>
         </li>
+        @endif
         <li>
             <form action="{{ route('logout') }}" method="POST" class="flex w-full">
                 @csrf

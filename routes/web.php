@@ -37,38 +37,6 @@ Route::middleware('auth')->group(function () {
             Route::post('/return', 'generateQRToReturn')->name('library.return');
         });
     });
-    Route::prefix('data')->group(function () {
-        Route::controller(ShowController::class)->group(function () {
-            Route::get('/', 'bookPage')->name('data.bookPage');
-            Route::get('/category', 'catagoryPage')->name('data.catagoryPage');
-            Route::get('/status', 'statusPage')->name('data.statusPage');
-            Route::get('/user', 'userPage')->name('data.userPage');
-        });
-        Route::controller(ShowBookController::class)->group(function () {
-            Route::get('/book/{id}', 'show')->name('data.show.book');
-        });
-        Route::prefix('create')->group(function () {
-            Route::controller(CreateController::class)->group(function () {
-                Route::post('/book', 'createBook')->name('data.create.book');
-                Route::post('/category', 'createCategory')->name('data.create.category');
-                Route::post('/status', 'createStatus')->name('data.create.status');
-            });
-        });
-        Route::prefix('delete')->group(function () {
-            Route::controller(DeleteController::class)->group(function () {
-                Route::post('/book', 'deleteBook')->name('data.delete.book');
-                Route::post('/category', 'deleteCategory')->name('data.delete.category');
-                Route::post('/status', 'deleteStatus')->name('data.delete.status');
-            });
-        });
-        Route::prefix('update')->group(function () {
-            Route::controller(EditController::class)->group(function () {
-                Route::post('/book', 'editBook')->name('data.update.book');
-                Route::post('/category', 'editCategory')->name('data.update.category');
-                Route::post('/status', 'editStatus')->name('data.update.status');
-            });
-        });
-    });
     Route::prefix('borrowed')->group(function () {
         Route::controller(BorrowedController::class)->group(function () {
             Route::get('/', 'index')->name('borrowed.index');
@@ -83,14 +51,48 @@ Route::middleware('auth')->group(function () {
             Route::post('/delete-photo', 'deletePhoto')->name('profile.delete-photo');
         });
     });
-    Route::prefix('chat')->group(function () {
-        Route::controller(ChatController::class)->group(function () {
-            Route::get('/', 'chatPage')->name('chat.index');
-            Route::get('/request', 'requestPage')->name('request.index');
-        });
-    });
     Route::controller(LoginController::class)->group(function () {
         Route::post('logout', 'logout')->name('logout');
+    });
+    Route::group(['middleware' => ['auth', 'admin']], function () {
+        Route::prefix('data')->group(function () {
+            Route::controller(ShowController::class)->group(function () {
+                Route::get('/', 'bookPage')->name('data.bookPage');
+                Route::get('/category', 'catagoryPage')->name('data.catagoryPage');
+                Route::get('/status', 'statusPage')->name('data.statusPage');
+                Route::get('/user', 'userPage')->name('data.userPage');
+            });
+            Route::controller(ShowBookController::class)->group(function () {
+                Route::get('/book/{id}', 'show')->name('data.show.book');
+            });
+            Route::prefix('create')->group(function () {
+                Route::controller(CreateController::class)->group(function () {
+                    Route::post('/book', 'createBook')->name('data.create.book');
+                    Route::post('/category', 'createCategory')->name('data.create.category');
+                    Route::post('/status', 'createStatus')->name('data.create.status');
+                });
+            });
+            Route::prefix('delete')->group(function () {
+                Route::controller(DeleteController::class)->group(function () {
+                    Route::post('/book', 'deleteBook')->name('data.delete.book');
+                    Route::post('/category', 'deleteCategory')->name('data.delete.category');
+                    Route::post('/status', 'deleteStatus')->name('data.delete.status');
+                });
+            });
+            Route::prefix('update')->group(function () {
+                Route::controller(EditController::class)->group(function () {
+                    Route::post('/book', 'editBook')->name('data.update.book');
+                    Route::post('/category', 'editCategory')->name('data.update.category');
+                    Route::post('/status', 'editStatus')->name('data.update.status');
+                });
+            });
+        });
+        Route::prefix('chat')->group(function () {
+            Route::controller(ChatController::class)->group(function () {
+                Route::get('/', 'chatPage')->name('chat.index');
+                Route::get('/request', 'requestPage')->name('request.index');
+            });
+        });
     });
 });
 Route::get('/borrow/{bookId}/{stockId}/{userId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');

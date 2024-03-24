@@ -25,6 +25,7 @@ class User extends Authenticatable
         'email',
         'password',
         'last_borrowed_date',
+        'role'
     ];
 
     /**
@@ -56,5 +57,8 @@ class User extends Authenticatable
     }
     public function chat(){
         return $this->hasMany(Chat::class);
+    }
+    public function isAdmin(){
+        return $this->role === 'admin';
     }
 }

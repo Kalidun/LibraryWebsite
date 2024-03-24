@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('role')->default('user');
             $table->date('last_borrowed_date')->nullable();
             $table->integer('borrowed_count')->default(0);
             $table->timestamp('email_verified_at')->nullable();
