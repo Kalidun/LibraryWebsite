@@ -2,10 +2,11 @@
 
 namespace App\Livewire\Chat;
 
-use App\Models\ChatMessage;
 use App\Models\User;
 use Livewire\Component;
 use App\Models\chat\Chat;
+use App\Models\ChatMessage;
+use App\Notifications\MessageSent;
 
 class ChatPage extends Component
 {
@@ -15,6 +16,21 @@ class ChatPage extends Component
     public $chat = [];
     public $chatMessage = [];
     public $message = '';
+    public function getListeners()
+    {
+        $authId = auth()->user()->id;
+        return [
+            "echo-private:users.{$authId},.Illuminate\\Notifications\\Events\\BroadcastNotificationCreated" => 'broadcestedNotification'
+        ];
+    }
+    public function broadcestedNotification($notification)
+    {
+        if ($this->chat != null) {
+            if ($notification['chat_id'] == $this->chat[0]->id) {
+                $this->getChatMessage($this->chat[0]->id);
+            }
+        }
+    }
     public function render()
     {
         $this->getAuthId();
@@ -42,13 +58,15 @@ class ChatPage extends Component
         $this->chat = [];
         $this->chatMessage = [];
     }
-    public function getChatMessage($id){
+    public function getChatMessage($id)
+    {
         $chatMessage = ChatMessage::where('chat_id', $id)->get();
-        if($chatMessage != null){
+        if ($chatMessage != null) {
             $this->chatMessage = $chatMessage;
-        }else{
+        } else {
             $this->chatMessage = collect([]);
         }
+        $this->dispatch('scroll-bottom');
     }
     public function getChat($id)
     {
@@ -61,9 +79,9 @@ class ChatPage extends Component
         })->get();
 
         if ($existingChat->count() > 0) {
-            if($existingChat[0]->user_id == $this->authId){
+            if ($existingChat[0]->user_id == $this->authId) {
                 $this->toUserId = $existingChat[0]->to_user_id;
-            } else{
+            } else {
                 $this->toUserId = $existingChat[0]->user_id;
             }
             $this->chat = $existingChat;
@@ -78,7 +96,8 @@ class ChatPage extends Component
             $this->chat = collect([$createdChat]);
         }
     }
-    public function sendChatMessage(){
+    public function sendChatMessage()
+    {
         $this->validate([
             'message' => 'required'
         ]);
@@ -90,8 +109,13 @@ class ChatPage extends Component
             'status_id' => 1,
             'date_sent' => now()
         ]);
+        $this->chat[0]->toUser->notify(new MessageSent(
+            $this->authId,
+            $this->message,
+            $this->chat[0]->id,
+            $this->toUserId
+        ));
         $this->message = '';
-        $this->chatMessage = collect([]);
         $this->getChatMessage($this->chat[0]->id);
     }
 }

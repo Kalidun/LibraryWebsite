@@ -2,6 +2,6 @@
 
 @section('section')
     <div class="w-full h-full">
-        @livewire('chat.chat-page') 
+        @livewire('chat.c   hat-page') 
     </div>
 @endsection

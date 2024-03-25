@@ -22,7 +22,7 @@
                 @auth
                     <button id="dropdownDividerButton" data-dropdown-toggle="dropdownDivider"
                         class="text-white bg-teal-300 hover:bg-teal-400 focus:ring-4 focus:outline-none focus:ring-teal-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center items-center dark:bg-teal-300 dark:hover:bg-teal-400 dark:focus:ring-teal-500 hover:text-black 
-                        {{ request()->routeIs('chat.index') ? 'hidden lg:inline-flex' : 'inline-flex' }}"
+                        {{ request()->routeIs('chat.index') ? 'hidden xl:inline-flex' : 'inline-flex' }}"
                         type="button">
                         <i class="fa fa-user"></i>
                     </button>
@@ -50,7 +50,7 @@
                     <button data-drawer-target="sidebar-user-chat" data-drawer-toggle="sidebar-user-chat"
                         aria-controls="sidebar-user-chat" type="button" data-drawer-placement="right"
                         class="items-center p-1 ms-3 text-sm text-black rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 dark:text-gray-400 z-[100] h-fit focus:text-gray-900 focus:ring-gray-600
-                        {{ request()->routeIs('chat.index') ? 'flex lg:hidden' : 'hidden' }}
+                        {{ request()->routeIs('chat.index') ? 'flex xl:hidden' : 'hidden' }}
                         ">
                         <i class="fa-solid fa-address-book text-xl"></i>
                     </button>

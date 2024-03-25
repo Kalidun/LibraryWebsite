@@ -55,10 +55,19 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserData::class);
     }
-    public function chat(){
+    public function chat()
+    {
         return $this->hasMany(Chat::class);
     }
-    public function isAdmin(){
+    public function isAdmin()
+    {
         return $this->role === 'admin';
+    }
+    /**
+     * The channels the user receives notification broadcasts on.
+     */
+    public function receivesBroadcastNotificationsOn(): string
+    {
+        return 'users.' . $this->id;
     }
 }

@@ -13,20 +13,20 @@
         <div id="books" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5">
             @forelse ($borrowedBooks as $borrowedBook)
                 <a href="{{ route('borrowed.show', $borrowedBook->id) }}"
-                    class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl hover:shadow-gray-6  shadow-xl hover:scale-105 transition duration-200 max-h-[19rem] hover:border-2 border-gray-300 shadow-gray-400">
+                    class="h-fit p-4 bg-teal-100 rounded-xl flex justify-center flex-col hover:shadow-2xl hover:shadow-gray-600 shadow-xl hover:scale-105 transition duration-200 max-h-[19rem] border-gray-300 shadow-gray-400">
                     <div id="title" class="flex justify-between ">
                         @if ($borrowedBook->is_returned == 0)
-                            <p class="capitalize font-bold mb-2">{{ $borrowedBook->book->title }}</p>
+                            <p class="capitalize font-bold mb-2 inline max-w-full truncate">{{ $borrowedBook->book->title }}</p>
                         @else
-                            <p class="capitalize font-bold mb-2">{{ $borrowedBook->book->title }} (Returned)</p>
+                            <p class="capitalize font-bold mb-2 inline max-w-full truncate">{{ $borrowedBook->book->title }} (Returned)</p>
                         @endif
                     </div>
                     <div id="image" class="h-full flex justify-center">
                         @if ($borrowedBook->book->image == null)
-                            <img src="{{ asset('images/defaultPhoto.avif') }}" class="w-44 h-auto rounded-xl">
+                            <img src="{{ asset('images/defaultPhoto.avif') }}" class="w-44 h-auto rounded-xl max-h-[10rem]">
                         @else
                             <img src="{{ asset('storage/images/books/' . $borrowedBook->book->image) }}"
-                                class="w-44 h-auto rounded-xl">
+                                class="w-8/12 rounded-xl">
                         @endif
                     </div>
                     <div id="description" class="text-center flex flex-wrap justify-between mt-3 gap-2">

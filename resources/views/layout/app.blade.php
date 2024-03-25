@@ -24,10 +24,10 @@
             scroll-behavior: smooth;
         }
     </style>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- <link rel="stylesheet" href="{{ asset('css/app-ab2b65e9.css') }}"> --}}
-    {{-- <script src="{{ asset('js/app-794b5d55.js') }}"></script> --}}
+    <link rel="stylesheet" href="{{ asset('build/assets/app-b113fb7e.css') }}">
+    <script src="{{ asset('build/assets/app-1623dfb9.js') }}"></script>
+    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
 
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css"> --}}

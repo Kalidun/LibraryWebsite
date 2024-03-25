@@ -37,7 +37,7 @@
                             <p class="text-red-500 text-sm">{{ $message }}</p>
                         @enderror
                     </div>
-                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/3">Login</button>
+                    <button class="bg-teal-400 p-1 rounded-xl text-white w-1/3">Register</button>
                 </form>
                 <div>
                     <a href="{{ route('login') }}" class="text-teal-700">Already have an account?</a>
