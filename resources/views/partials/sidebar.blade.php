@@ -85,6 +85,15 @@
                         </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('data.pendingPage') }}"
+                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.pendingPage') ? 'bg-teal-300 text-white' : '' }}">
+                        <i class="fa-solid fa-calendar"></i>
+                        <span class="flex-1 ms-3 whitespace-nowrap">
+                            Booking Data 
+                        </span>
+                    </a>
+                </li>
             </ul>
         </li>
         <li>
@@ -110,11 +119,6 @@
         const dropdownIcon = document.getElementById('dropdownButtonIcon');
 
         function toggleDropdown() {
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Operation completed successfully!',
-            })
             if (dropdownIcon.classList.contains('rotate-180')) {
                 dropdownIcon.classList.remove('rotate-180');
             } else {

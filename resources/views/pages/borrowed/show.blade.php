@@ -37,16 +37,20 @@
                         <span>Borrowed Date</span>
                         <span>{{ $bookData->created_at->diffForHumans() }}</span>
                     </div>
-                    @if ($bookData->is_returned == 0)
+                    @if ($bookData->is_returned == 0 && $bookData->status_id == 4)
                         <button
                             class="bg-teal-400 p-1 rounded-xl text-white w-1/2 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90"
                             data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
                             Send Back
                         </button>
-                    @else
+                    @elseif($bookData->is_returned == 1)
                         <div class="flex justify-center select-none">
                             <div class="text-center font-bold text-black border border-black rounded-xl p-1 w-1/2">Returned
                             </div>
+                        </div>
+                    @else
+                        <div class="flex justify-center select-none">
+                            <div class="text-center font-bold text-black border border-black rounded-xl p-1 w-1/2">Booked</div>
                         </div>
                     @endif
                     <div id="qr">

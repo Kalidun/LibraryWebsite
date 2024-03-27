@@ -17,6 +17,12 @@ class BookStatusSeeder extends Seeder
             'name' => 'Available',
         ]);
         BookStatus::create([
+            'name' => 'Pending',
+        ]);
+        BookStatus::create([
+            'name' => 'Cancelled',
+        ]);
+        BookStatus::create([
             'name' => 'Borrowed',
         ]);
         BookStatus::create([

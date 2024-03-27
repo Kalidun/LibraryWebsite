@@ -24,7 +24,7 @@
                     <label for="book_id">Status</label>
                     <select name="status" id="status" class="rounded-xl p-1">
                         <option value="1" selected>Returned</option>
-                        @foreach ($bookStatus->skip(2) as $status)
+                        @foreach ($bookStatus->skip(4) as $status)
                             <option value="{{ $status->id }}">{{ $status->name }}</option>
                         @endforeach
                     </select>

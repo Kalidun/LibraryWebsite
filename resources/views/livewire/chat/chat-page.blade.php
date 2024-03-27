@@ -92,9 +92,9 @@
                         <div class="image  rounded-full h-fit w-fit">
                             @if ($user->userData->image)
                                 <img src="{{ asset('storage/images/users/' . $user->userData->image) }}"
-                                    class="rounded-full shadow " style="max-height: 3rem; max-width: 3rem">
+                                    class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
                             @else
-                                <img src="{{ asset('images/defaultPhoto.avif') }}" class="rounded-full shadow">
+                                <img src="{{ asset('images/defaultPhoto.avif') }}" class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
                             @endif
                         </div>
                         <div class="ml-2">

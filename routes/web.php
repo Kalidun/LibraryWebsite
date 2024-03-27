@@ -32,7 +32,9 @@ Route::middleware('auth')->group(function () {
         Route::controller(LibraryController::class)->group(function () {
             Route::get('/', 'index')->name('library.index');
             Route::get('/{title}', 'show')->name('library.show');
-            Route::post('/borrow', 'borrow')->name('library.borrow');
+            Route::get('/booking/{id}', 'BookingBook')->name('library.booking');
+            Route::get('/cancel/{id}', 'cancelBooking')->name('library.cancel');
+            Route::get('/cancelJS/{id}', 'cancelBookingAjax')->name('library.cancel.ajax');
             Route::get('/QrCode/{id}', 'generateQRToBorrow')->name('library.QrCode');
             Route::post('/return', 'generateQRToReturn')->name('library.return');
         });
@@ -61,6 +63,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/category', 'catagoryPage')->name('data.catagoryPage');
                 Route::get('/status', 'statusPage')->name('data.statusPage');
                 Route::get('/user', 'userPage')->name('data.userPage');
+                Route::get('/pending', 'pendingPage')->name('data.pendingPage');
             });
             Route::controller(ShowBookController::class)->group(function () {
                 Route::get('/book/{id}', 'show')->name('data.show.book');
@@ -84,6 +87,7 @@ Route::middleware('auth')->group(function () {
                     Route::post('/book', 'editBook')->name('data.update.book');
                     Route::post('/category', 'editCategory')->name('data.update.category');
                     Route::post('/status', 'editStatus')->name('data.update.status');
+                    Route::post('/stock', 'editStockStatus')->name('data.update.stock');
                 });
             });
         });
@@ -95,6 +99,6 @@ Route::middleware('auth')->group(function () {
         });
     });
 });
-Route::get('/borrow/{bookId}/{stockId}/{userId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
+Route::get('/borrow/{borrowedId}/{stockId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
 Route::get('/return/{stockId}/{borrowedId}/{statusId}/{userId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
 require __DIR__ . '/auth.php';

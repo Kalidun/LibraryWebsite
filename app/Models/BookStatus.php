@@ -14,4 +14,7 @@ class BookStatus extends Model
     {
         return $this->hasMany(BookStock::class);
     }
+    public function borrowedBooks(){
+        return $this->hasMany(BorrowedBook::class);
+    }
 }

@@ -17,7 +17,7 @@ class ShowBookController extends Controller
         $dataBook = Book::with('stocks')->where('id', $id)->first();
         $bookStocks = BookStock::where('book_id', $id)->get();
         $borrowedBook = BorrowedBook::where('book_id', $id)->where('is_returned', 0)->with('user')->get();
-
-        return view('pages.data.show.show-book', compact('bookStocks', 'dataBook', 'borrowedBook'));
+        $dataStatus = BookStatus::all();
+        return view('pages.data.show.show-book', compact('bookStocks', 'dataBook', 'borrowedBook', 'dataStatus'));  
     }
 }

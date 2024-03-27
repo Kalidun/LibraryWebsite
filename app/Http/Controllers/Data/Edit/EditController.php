@@ -46,19 +46,21 @@ class EditController extends Controller
                     }
                 } else if ($request->book_stock < BookStock::where('book_id', $request->book_id)->count()) {
                     $bookMustRemoved = BookStock::where('book_id', $request->book_id)->count() - $request->book_stock;
-                    if($bookMustRemoved > BookStock::where('book_id', $request->book_id)->where('status_id', 1)->count()){
+                    if ($bookMustRemoved > BookStock::where('book_id', $request->book_id)->where('status_id', 1)->count()) {
                         throw new Exception('Cannot delete, Books is borrowed');
                     }
                     for ($i = 0; $i < $bookMustRemoved; $i++) {
                         BookStock::where('book_id', $request->book_id)->where('status_id', 1)->first()->delete();
                     }
+                } else {
+                    // do nothing
                 }
             }
             Book::where('id', $request->book_id)->update([
                 'title' => $request->book_title,
                 'author' => $request->book_author,
                 'description' => $request->book_description,
-            ]); 
+            ]);
             return redirect()->back()->with('success', 'Book updated successfully');
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
@@ -93,6 +95,22 @@ class EditController extends Controller
             return redirect()->back()->with('success', 'Status updated successfully');
         } catch (\Throwable $e) {
             return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function editStockStatus(Request $request)
+    {
+        try {
+            $stockData = BookStock::where('id', $request->stock_id)->first();
+            $stockData->update([
+                'status_id' => $request->status_id
+            ]);
+            return response()->json([
+                'success' => 'Stock status updated successfully'
+            ]);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }

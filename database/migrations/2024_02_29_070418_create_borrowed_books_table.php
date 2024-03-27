@@ -17,7 +17,9 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('stock_id');
+            $table->unsignedBigInteger('status_id');
             $table->boolean('is_returned')->default(0);
+            $table->foreign('status_id')->references('id')->on('book_statuses')->onDelete('cascade');
             $table->foreign('stock_id')->references('id')->on('book_stocks')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
             $table->timestamps();

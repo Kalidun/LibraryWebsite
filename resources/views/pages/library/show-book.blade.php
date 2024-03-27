@@ -37,19 +37,51 @@
                         <span>Stock</span>
                         <span class="font-bold">{{ $bookStock->where('book_id', $bookData->id)->count() }}</span>
                     </div>
-                    <div id="info" class="flex justify-start mt-5">
-                        @if ($bookStock->where('book_id', $bookData->id)->count() > 0)
-                            <button id="borrow-button"
-                                class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500"
-                                data-modal-target="borrow-book-modal" data-modal-toggle="borrow-book-modal"
-                                data-bookid="{{ $bookData->id }}">
-                                <div class="flex items-center gap-2">
-                                    <i class="fa-solid fa-book"></i>
-                                    <span>Borrow</span>
-                                </div>
-                            </button>
+                    <div id="info" class="flex flex-col justify-start mt-5">
+                        @if ($borrowedBook != null)
+                        <p class="text-red-500 font-bold text-lg w-full text-center">You have already borrowed this book</p>
                         @else
-                            <p class="text-red-500 font-bold text-xl w-full text-center">Out of Stock</p>
+                            @if ($bookingBook != null)
+                                <div>
+                                    <p class="text-red-500 font-bold text-lg w-full text-center">You have already booked
+                                        this
+                                        book</p>
+                                </div>
+                                <div class="w-full">
+                                    <div id="info" class="flex justify-between mt-5">
+                                        <span>Booking At</span>
+                                        <span>{{ $bookingBook->created_at->format('d-m-Y') }}</span>
+                                        <span>{{ $bookingBook->created_at->addHours(8)->format('H:i') }}</span>
+                                        <input type="datetime" name="datetime" id="datetime"
+                                            value="{{ $bookingBook->created_at->addHours(8)->format('Y-m-d H:i') }}"
+                                            hidden>
+                                    </div>
+                                </div>
+                                <div class="w-full">
+                                    <div id="info" class="flex justify-between mt-5 w-full">
+                                        <button id="borrow-button" data-modal-target="borrow-book-modal"
+                                            data-modal-toggle="borrow-book-modal"
+                                            class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500">
+                                            Create QrCode
+                                        </button>
+                                        <div class="w-1/2 h-full flex justify-end items-center">
+                                            <a href="{{ route('library.cancel', $bookingBook->id) }}" class="text-white p-2 rounded-xl bg-red-500 hover:bg-red-600 transition duration-200 active:scale-90">Cancel Booking</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @else
+                                @if ($bookStock->where('book_id', $bookData->id)->count() > 0)
+                                    <a href="{{ route('library.booking', $bookData->id) }}"
+                                        class="bg-teal-400 p-2 rounded-xl text-white active:bg-teal-600 transition duration-200 active:scale-90 hover:bg-teal-500 w-1/2">
+                                        <div class="flex items-center gap-2 ">
+                                            <i class="fa-solid fa-book"></i>
+                                            <span>Booking Book</span>
+                                        </div>
+                                    </a>
+                                @else
+                                    <p class="text-red-500 font-bold text-xl w-full text-center">Out of Stock</p>
+                                @endif
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -62,11 +94,12 @@
             </div>
         </div>
     </div>
+    @if($bookingBook != null)
     <script>
         $(document).ready(function() {
             $('#borrow-button').on('click', function() {
                 $.ajax({
-                    url: "{{ route('library.QrCode', $bookData->id) }}",
+                    url: "{{ route('library.QrCode', $bookingBook->id) }}",
                     type: 'GET',
                     success: function(data, textStatus, xhr) {
                         if (xhr.status === 200) {
@@ -86,6 +119,9 @@
                     }
                 });
             });
+            // $('datetime').val($('#datetime').val());
+            // console.log($('#datetime').val());
         });
     </script>
+    @endif
 @endsection

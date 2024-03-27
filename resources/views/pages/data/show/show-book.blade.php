@@ -1,6 +1,7 @@
 @extends('layout.dashboard')
 
 @section('section')
+    @include('pages.data.modal.modal-edit-stock-book')
     <style>
         tr:hover {
             background-color: #7aecdb;
@@ -98,12 +99,12 @@
                             @else
                                 <td>-</td>
                             @endif
-
-
                             <td class="text-center">
-                                <a href="#"><i class="fa-solid fa-comments"></i></a>
+                                <button id="edit-button" data-modal-target="edit-stock-book"
+                                    data-modal-toggle="edit-stock-book" onclick="sendDataToModal('{{ $bookStock->id }}', '{{ $bookStock->status->id }}')">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </button>
                             </td>
-
                         </tr>
                     @empty
                         <tr colspan="6" class="text-center">
@@ -115,5 +116,32 @@
             </div>
         </div>
     </div>
-    </div>
+    <script>
+        const inputStockId = document.getElementById('stock_id');
+        const inputStatusId = document.getElementById('status_id');
+        function sendDataToModal(id, name) {
+            inputStockId.value = id
+            inputStatusId.value = name
+        }
+
+        $(document).ready(function () {
+            $('#edit-status-form').submit(function (event) {
+                event.preventDefault();
+                let data = $(this).serialize();
+
+                $.ajax({
+                    url: "{{ route('data.update.stock') }}",
+                    type: 'POST',
+                    data: data,
+                    success: function (response) {
+                        console.log(response);
+                        location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        toastr.error(xhr.responseJSON.error);
+                    }
+                })
+            })
+        })
+    </script>
 @endsection

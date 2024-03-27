@@ -11,7 +11,7 @@
             </div>
             {{-- Content --}}
             <div class="p-4">
-                <div class="text-center">Scan Qr to borrow book</div>
+                <div class="text-center">Scan the QR code to ensure that you have taken the book</div>
                 <div id="qr" class="flex justify-center">
                     
                 </div>
