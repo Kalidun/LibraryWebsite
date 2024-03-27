@@ -119,8 +119,6 @@
                     }
                 });
             });
-            // $('datetime').val($('#datetime').val());
-            // console.log($('#datetime').val());
         });
     </script>
     @endif

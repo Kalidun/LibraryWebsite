@@ -40,7 +40,7 @@
                     @if ($bookData->is_returned == 0 && $bookData->status_id == 4)
                         <button
                             class="bg-teal-400 p-1 rounded-xl text-white w-1/2 hover:bg-teal-300 active:bg-teal-500 transition duration-200 active:scale-90"
-                            data-modal-target="return-book-modal" data-modal-toggle="return-book-modal">
+                            data-modal-target="return-book-modal" data-modal-toggle="return-book-modal" id="send-back-button">
                             Send Back
                         </button>
                     @elseif($bookData->is_returned == 1)

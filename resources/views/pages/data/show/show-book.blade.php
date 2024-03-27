@@ -70,7 +70,6 @@
                         <th>Borrowed By</th>
                         <th>Borrowed Since</th>
                         <th>Borrowed Date</th>
-                        <th>Return Date</th>
                         <th>Action</th>
                     </tr>
                     @forelse($bookStocks as $bookStock)
@@ -90,12 +89,7 @@
                                 <td>-</td>
                             @endif
                             @if ($borrowedBook->contains('stock_id', $bookStock->id))
-                                <td>{{ $borrowedBook->where('stock_id', $bookStock->id)->first()->return_date }}</td>
-                            @else
-                                <td>-</td>
-                            @endif
-                            @if ($borrowedBook->contains('stock_id', $bookStock->id))
-                                <td>{{ $borrowedBook->where('stock_id', $bookStock->id)->first()->return_date }}</td>
+                                <td>{{ $borrowedBook->where('stock_id', $bookStock->id)->first()->created_at }}</td>
                             @else
                                 <td>-</td>
                             @endif

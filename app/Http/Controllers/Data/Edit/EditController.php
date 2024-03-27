@@ -47,7 +47,7 @@ class EditController extends Controller
                 } else if ($request->book_stock < BookStock::where('book_id', $request->book_id)->count()) {
                     $bookMustRemoved = BookStock::where('book_id', $request->book_id)->count() - $request->book_stock;
                     if ($bookMustRemoved > BookStock::where('book_id', $request->book_id)->where('status_id', 1)->count()) {
-                        throw new Exception('Cannot delete, Books is borrowed');
+                        throw new Exception('Cannot delete, Something went wrong');
                     }
                     for ($i = 0; $i < $bookMustRemoved; $i++) {
                         BookStock::where('book_id', $request->book_id)->where('status_id', 1)->first()->delete();

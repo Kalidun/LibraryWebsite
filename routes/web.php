@@ -37,6 +37,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/cancelJS/{id}', 'cancelBookingAjax')->name('library.cancel.ajax');
             Route::get('/QrCode/{id}', 'generateQRToBorrow')->name('library.QrCode');
             Route::post('/return', 'generateQRToReturn')->name('library.return');
+            Route::post('/confirmed', 'confirmedStatus')->name('library.confirmed');
         });
     });
     Route::prefix('borrowed')->group(function () {
@@ -64,6 +65,7 @@ Route::middleware('auth')->group(function () {
                 Route::get('/status', 'statusPage')->name('data.statusPage');
                 Route::get('/user', 'userPage')->name('data.userPage');
                 Route::get('/pending', 'pendingPage')->name('data.pendingPage');
+                Route::get('/return', 'returnPage')->name('data.returnPage');
             });
             Route::controller(ShowBookController::class)->group(function () {
                 Route::get('/book/{id}', 'show')->name('data.show.book');
@@ -100,5 +102,5 @@ Route::middleware('auth')->group(function () {
     });
 });
 Route::get('/borrow/{borrowedId}/{stockId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
-Route::get('/return/{stockId}/{borrowedId}/{statusId}/{userId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
+Route::get('/return/{borrowedId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
 require __DIR__ . '/auth.php';

@@ -48,4 +48,13 @@ class ShowController extends Controller
         $bookingData = BorrowedBook::where('is_returned', 0)->where('status_id', 2)->get();
         return view('pages.data.pending', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus', 'bookingData'));
     }
+    public function returnPage(){
+        $dataBooks = Book::get();
+        $dataUser = User::get();
+        $dataCategory = BookCategory::get();
+        $dataStatus = BookStatus::get();
+
+        $pendingReturnedBook = BorrowedBook::where('is_returned', 1)->where('status_id', 2)->get();
+        return view('pages.data.return', compact('dataBooks', 'dataUser', 'dataCategory', 'dataStatus', 'pendingReturnedBook'));
+    }
 }

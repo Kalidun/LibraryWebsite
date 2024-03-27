@@ -119,8 +119,8 @@ class LibraryController extends Controller
             $encryptBorrowedId = Crypt::encryptString($borrowedData->id);
             $encryptStockId = Crypt::encryptString($borrowedData->stock_id);
             // $url = 'http://192.168.97.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            // $url = '192.168.67.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            // $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            $url = 'http://192.168.100.92/:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
             return response(QrCode::size(300)->generate($url));
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
@@ -159,36 +159,45 @@ class LibraryController extends Controller
     public function generateQRToReturn(Request $request)
     {
         try {
-            $stockId = Crypt::encryptString($request->stock_id);
             $borrowedId = Crypt::encryptString($request->borrowed_id);
-            $statusId = Crypt::encryptString($request->status);
-            $userId = Crypt::encryptString(Auth::user()->id);
-            // $url = 'http://192.168.97.33:8000/' . 'return/' . $stockId . '/' . $borrowedId . '/' . $statusId . '/' . $userId;
-            $url = 'http://192.168.138.33:8000/' . 'return/' . $stockId . '/' . $borrowedId . '/' . $statusId . '/' . $userId;
-            // $url = 'http://192.168.100.92:8000/' . 'return/' . $stockId . '/' . $borrowedId . '/' . $statusId . '/' . $userId;
+            // $url = 'http://192.168.97.33:8000/' . 'return/' . $borrowedId;
+            // $url = 'http://192.168.138.33:8000/' . 'return/' . $borrowedId;
+            $url = 'http://192.168.100.92:8000/' . 'return/' . $borrowedId;
 
             return QrCode::size(300)->generate($url);
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
         }
     }
-    public function readQRCodeToReturn($stockIdEncrypted, $borrowedIdEncrypted, $statusIdEncrypted, $userIdEncrypted)
+    public function readQRCodeToReturn($borrowedIdEncrypted)
     {
         try {
-            $stockId = Crypt::decryptString($stockIdEncrypted);
             $borrowedId = Crypt::decryptString($borrowedIdEncrypted);
-            $statusId = Crypt::decryptString($statusIdEncrypted);
-            $userId = Crypt::decryptString($userIdEncrypted);
-            BorrowedBook::where('id', $borrowedId)->where('user_id', $userId)->update([
-                'is_returned' => 1,
-                'status_id' => $statusId,
-            ]);
-            BookStock::where('id', $stockId)->update([
-                'status_id' => $statusId,
+            $borrowedData = BorrowedBook::where('id', $borrowedId)->first();
+            $borrowedData->update([
+                'status_id' => 2,
+                'is_returned' => 1
             ]);
             return redirect()->route('borrowed.index')->with('success', 'Book Returned Successfully');
         } catch (\Throwable $th) {
             return redirect()->route('borrowed.index')->with('error', $th->getMessage());
+        }
+    }
+    public function confirmedStatus(Request $request){
+        // "borrowed_id" => "4"
+        // "status_id" => "2"
+        try{
+            $borrowedData = BorrowedBook::where('id', $request->borrowed_id)->first();
+            $stockData = BookStock::where('id', $borrowedData->stock_id)->first();
+            $borrowedData->update([
+                'status_id' => $request->status_id
+            ]);
+            $stockData->update([
+                'status_id' => $request->status_id
+            ]);
+            return redirect()->back()->with('success', 'Status Updated Successfully');
+        } catch (\Throwable $th){
+            return redirect()->back()->with('error', $th->getMessage());
         }
     }
 }
