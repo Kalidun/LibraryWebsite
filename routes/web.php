@@ -99,8 +99,8 @@ Route::middleware('auth')->group(function () {
                 Route::get('/request', 'requestPage')->name('request.index');
             });
         });
+        Route::get('/borrow/{borrowedId}/{stockId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
+        Route::get('/return/{borrowedId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
     });
 });
-Route::get('/borrow/{borrowedId}/{stockId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
-Route::get('/return/{borrowedId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
 require __DIR__ . '/auth.php';

@@ -4,7 +4,7 @@
             <div class="profil fixed top-[3.25rem] bg-teal-100 w-full p-2">
                 @forelse($chatData as $chat)
                     <div class="flex gap-10 select-none">
-                        <button type="button" class="hover:bg-teal-300 text-black p-1 max-h-5 rounded-full"
+                        <button type="button" class="hover:bg-teal-300 bg-teal-400 text-black p-1 rounded-full"
                             wire:click="resetChatData">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
@@ -43,18 +43,20 @@
                         @forelse ($chatMessage as $message)
                             @if ($message->user_id == Auth::user()->id)
                                 <div class="w-full flex justify-end mb-2">
-                                    <div class="w-fit max-w-3/4 p-1 bg-teal-300 rounded text-black text-right flex flex-col">
+                                    <div
+                                        class="w-fit max-w-3/4 p-1 bg-teal-300 rounded text-black text-right flex flex-col">
                                         <div>
                                             {{ $message->message }}
                                         </div>
                                         <div class="text-xs w-full text-start">
-                                        {{ $message->created_at->addHours(8)->format('H:i') }}
+                                            {{ $message->created_at->addHours(8)->format('H:i') }}
                                         </div>
                                     </div>
                                 </div>
                             @else
                                 <div class="w-full flex justify-start mb-2">
-                                    <div class="w-fit max-w-3/4 p-1 bg-teal-200 rounded text-black text-left flex flex-col">
+                                    <div
+                                        class="w-fit max-w-3/4 p-1 bg-teal-200 rounded text-black text-left flex flex-col">
                                         <div>
                                             {{ $message->message }}
                                         </div>
@@ -88,29 +90,39 @@
                 @forelse ($userData as $user)
                     <button id="contact" wire:click="getChat({{ $user->id }})"
                         data-drawer-hide="sidebar-user-chat"
-                        class="w-full p-2 flex items-center border-b-2 border-gray-300 bg-teal-100 hover:bg-teal-300">
-                        <div class="image  rounded-full h-fit w-fit">
-                            @if ($user->userData->image)
-                                <img src="{{ asset('storage/images/users/' . $user->userData->image) }}"
-                                    class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
-                            @else
-                                <img src="{{ asset('images/defaultPhoto.avif') }}" class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
-                            @endif
-                        </div>
-                        <div class="ml-2">
-                            <div class="name text-lg font-semibold">
-                                {{ $user->username }}
-                                {{ $user->id }}
+                        class="w-full p-2 flex items-center justify-between border-b-2 border-gray-300 bg-teal-100 hover:bg-teal-300">
+                        <div class="flex items-center">
+                            <div class="image  rounded-full h-fit w-fit">
+                                @if ($user->userData->image)
+                                    <img src="{{ asset('storage/images/users/' . $user->userData->image) }}"
+                                        class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
+                                @else
+                                    <img src="{{ asset('images/defaultPhoto.avif') }}"
+                                        class="rounded-full shadow max-w-[2rem] max-h-[2rem]">
+                                @endif
                             </div>
-                            <div class="chat text-xs ">
+                            <div class="ml-2">
+                                <div class="name text-lg font-semibold">
+                                    {{ $user->username }}
+                                    {{ $user->id }}
+                                </div>
+                                <div class="chat text-xs ">
+                                </div>
                             </div>
                         </div>
+                        @if ($unreadMessage->where('user_id', $user->id)->where('status_id', 2)->count() > 0)
+                            <div class="p-2 bg-teal-300 rounded-full">
+                                {{-- <i class="fa-solid fa-exclamation"></i> --}}
+                                {{ $unreadMessage->where('user_id', $user->id)->where('status_id', 2)->count() }}
+                            </div>
+                        @endif
                     </button>
                 @empty
-                    <p class="w-full text-center col-span-5"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No
-                        Data</p>
-                @endforelse
             </div>
-        </aside>
+            <p class="w-full text-center col-span-5"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No
+                Data</p>
+            @endforelse
     </div>
+    </aside>
+</div>
 </div>

@@ -119,8 +119,8 @@ class LibraryController extends Controller
             $encryptBorrowedId = Crypt::encryptString($borrowedData->id);
             $encryptStockId = Crypt::encryptString($borrowedData->stock_id);
             // $url = 'http://192.168.97.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            // $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            $url = 'http://192.168.100.92/:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            // $url = 'http://192.168.100.92/:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
             return response(QrCode::size(300)->generate($url));
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
@@ -161,8 +161,8 @@ class LibraryController extends Controller
         try {
             $borrowedId = Crypt::encryptString($request->borrowed_id);
             // $url = 'http://192.168.97.33:8000/' . 'return/' . $borrowedId;
-            // $url = 'http://192.168.138.33:8000/' . 'return/' . $borrowedId;
-            $url = 'http://192.168.100.92:8000/' . 'return/' . $borrowedId;
+            $url = 'http://192.168.138.33:8000/' . 'return/' . $borrowedId;
+            // $url = 'http://192.168.100.92:8000/' . 'return/' . $borrowedId;
 
             return QrCode::size(300)->generate($url);
         } catch (\Throwable $th) {

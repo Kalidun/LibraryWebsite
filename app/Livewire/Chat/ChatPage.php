@@ -16,6 +16,7 @@ class ChatPage extends Component
     public $chat = [];
     public $chatMessage = [];
     public $message = '';
+    public $unreadMessage = [];
     public function getListeners()
     {
         $authId = auth()->user()->id;
@@ -29,11 +30,13 @@ class ChatPage extends Component
             if ($notification['chat_id'] == $this->chat[0]->id) {
                 $this->getChatMessage($this->chat[0]->id);
             }
+            $this->getAllUncreadMessage();
         }
     }
     public function render()
     {
         $this->getAuthId();
+        $this->getAllUncreadMessage();
         $userData = User::whereNotIn('id', [auth()->user()->id])->with('chat');
         if ($this->search) {
             $userData = $userData->where('username', 'like', '%' . $this->search . '%');
@@ -42,7 +45,8 @@ class ChatPage extends Component
         return view('livewire.chat.chat-page', [
             'userData' => $userData,
             'chatData' => $this->chat,
-            'chatMessage' => $this->chatMessage
+            'chatMessage' => $this->chatMessage,
+            'unreadMessage' => $this->unreadMessage
         ]);
     }
     public function updateSearch()
@@ -58,6 +62,9 @@ class ChatPage extends Component
         $this->chat = [];
         $this->chatMessage = [];
     }
+    public function getAllUncreadMessage(){
+        $this->unreadMessage = ChatMessage::where('to_user_id', $this->authId)->where('status_id', 2)->get();
+    }
     public function getChatMessage($id)
     {
         $chatMessage = ChatMessage::where('chat_id', $id)->get();
@@ -67,6 +74,12 @@ class ChatPage extends Component
             $this->chatMessage = collect([]);
         }
         $this->dispatch('scroll-bottom');
+        $totalUnread = $chatMessage->where('to_user_id', $this->authId);
+        foreach ($totalUnread as $unread) {
+            $unread->update([
+                'status_id' => 1
+            ]);
+        }
     }
     public function getChat($id)
     {
@@ -106,7 +119,7 @@ class ChatPage extends Component
             'to_user_id' => $this->toUserId,
             'message' => $this->message,
             'chat_id' => $this->chat[0]->id,
-            'status_id' => 1,
+            'status_id' => 2,
             'date_sent' => now()
         ]);
         $this->chat[0]->toUser->notify(new MessageSent(

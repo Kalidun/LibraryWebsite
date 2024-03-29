@@ -13,6 +13,7 @@ class ChatAdmin extends Component
     public $chatMessage = [];
     public $UserId;
     public $message = '';
+    public $unreadMessages = [];
 
     public function getListeners()
     {
@@ -33,10 +34,18 @@ class ChatAdmin extends Component
     public function render()
     {
         $this->getUserId();
+        $this->getUnreadMessage();
+        foreach($this->unreadMessages as $unreadMessage){
+            $unreadMessage->status_id = 1;
+            $unreadMessage->save();
+        }
         return view('livewire.chat.chat-admin', [
             'chatData' => $this->chatData,
             'messages' => $this->chatMessage
         ]);
+    }
+    public function getUnreadMessage(){
+        $this->unreadMessages = ChatMessage::where('user_id', 1)->where('to_user_id', $this->UserId)->where('status_id', 2)->get();
     }
     public function getChat()
     {
@@ -73,7 +82,7 @@ class ChatAdmin extends Component
             'message' => $this->message,
             'user_id' => $this->UserId,
             'to_user_id' => 1,
-            'status_id' => 1,
+            'status_id' => 2,
             'date_sent' => now()
         ]);
 
