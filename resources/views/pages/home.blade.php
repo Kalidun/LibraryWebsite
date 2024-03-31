@@ -11,7 +11,7 @@
 
             <div id="default-carousel" class="relative w-full" data-carousel="slide">
                 <!-- Carousel wrapper -->
-                <div class="font-bold text-xl">Recent Books</div>
+                <div class="font-bold text-xl">Newest Books</div>
                 <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                     @foreach ($bookRecentImgs as $bookRecentImg)
                         <div class="hidden duration-700 ease-in-out max-w-full" data-carousel-item>
@@ -26,8 +26,8 @@
                 <!-- Slider indicators -->
                 <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
                     @foreach ($bookRecentImgs as $key => $bookRecentImg)
-                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true" aria-label="Slide {{ $key + 1 }}"
-                            data-carousel-slide-to="{{ $key }}"></button>
+                        <button type="button" class="w-3 h-3 rounded-full" aria-current="true"
+                            aria-label="Slide {{ $key + 1 }}" data-carousel-slide-to="{{ $key }}"></button>
                     @endforeach
                 </div>
                 <!-- Slider controls -->
@@ -59,18 +59,47 @@
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div class="flex flex-col border-2 p-4 bg-cyan-300 rounded-xl border-cyan-500">
-                    <span class="font-bold">Total Borrowed Book</span>
-                    <span>{{ $borrowedBooks->count() }}</span>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 w-full select-none">
+                <div
+                    class="w-full bg-blue-200 p-4 rounded-xl flex justify-between items-center border-2 border-blue-300 shadow hover:shadow-lg hover:shadow-blue-300 transition duration-200">
+                    <div id="icon">
+                        <i class="fa-solid fa-book p-4 bg-blue-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $totalBook }}</span>
+                        <span class="text-sm">Total Book</span>
+                    </div>
+
                 </div>
-                <div class="flex flex-col border-2 p-4 bg-yellow-300 rounded-xl border-yellow-500">
-                    <span class="font-bold">Total User in Website</span>
-                    <span>{{ $totalUser }}</span>
+                <div
+                    class="w-full bg-green-200 p-4 rounded-xl flex justify-between items-center border-2 border-green-300 shadow hover:shadow-lg hover:shadow-green-300 transition duration-200">
+                    <div id="icon">
+                        <i class="fa-solid fa-book-bookmark p-4 bg-green-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ $borrowedBooks->count() }}</span>
+                        <span class="text-sm">Total borrowed Book</span>
+                    </div>
                 </div>
-                <div class="flex flex-col border-2 p-4 bg-lime-300 rounded-xl border-lime-500">
-                    <span class="font-bold">Total Book in Website</span>
-                    <span>{{ $totalBook }}</span>
+                <div
+                    class="w-full bg-red-200 p-4 rounded-xl flex justify-between items-center border-2 border-red-300 shadow hover:shadow-lg hover:shadow-red-300 transition duration-200">
+                    <div id="icon">
+                        <i class="fa-solid fa-calendar-plus p-4 bg-red-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ Auth::user()->created_at->diffInDays() }}</span>
+                        <span class="text-sm">Account Age (Days)</span>
+                    </div>
+                </div>
+                <div
+                    class="w-full bg-yellow-200 p-4 rounded-xl flex justify-between items-center border-2 border-yellow-300 shadow hover:shadow-lg hover:shadow-yellow-300 transition duration-200">
+                    <div id="icon">
+                        <i class="fa-solid fa-user-plus p-4 bg-yellow-300 rounded-full"></i>
+                    </div>
+                    <div id="info" class="flex flex-col">
+                        <span class="text-lg font-bold text-right">{{ Auth::user()->created_at->format('d-m-Y') }}</span>
+                        <span class="text-sm">Has Joined Since</span>
+                    </div>
                 </div>
             </div>
             <div id="info-user" class="grid grid-cols-1 md:grid-cols-3 gap-2 mt-10">
@@ -87,20 +116,21 @@
                                 <th>No</th>
                                 <th>Title</th>
                                 <th>Author</th>
-                                <th>Return Date</th>
                             </tr>
-                            @foreach ($borrowedBooks as $borrow)
+                            @forelse ($borrowedBooks as $borrow)
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="capitalize">{{ $borrow->book->title }}</td>
                                     <td>{{ $borrow->book->author }}</td>
-                                    <td>{{ $borrow->return_date }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <td colspan="3" class="text-center"><i
+                                        class="fa-solid fa-triangle-exclamation mx-1"></i>No Data </td>
+                            @endforelse
                         </table>
                     </div>
                 </div>
-                <div class="w-full bg-teal-200 p-4 rounded-xl border-2 border-teal-500 h-fit">
+                <div class="w-full bg-t`eal-200 p-4 rounded-xl border-2 border-teal-500 h-fit">
                     <div id="title">
                         <p class="text-center font-bold text-md">History Borrow</p>
                     </div>
@@ -110,12 +140,15 @@
                                 <th>No</th>
                                 <th>Title</th>
                             </tr>
-                            @foreach ($borrowedBooks as $borrow)
+                            @forelse ($borrowedBooks as $borrow)
                                 <tr class="text-center">
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="capitalize">{{ $borrow->book->title }}</td>
                                 </tr>
-                            @endforeach
+                            @empty
+                                <td colspan="2" class="text-center"><i
+                                        class="fa-solid fa-triangle-exclamation mx-1"></i>No Data </td>
+                            @endforelse
                         </table>
                     </div>
                 </div>

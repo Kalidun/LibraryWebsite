@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
@@ -10,7 +10,7 @@ Route::middleware('guest')->group(function () {
         Route::post('/login', 'authenticate')->name('login.post');
     });
     Route::controller(RegisterController::class)->group(function () {
-       Route::get('/register', 'index')->name('register');
-       Route::post('/register', 'store')->name('register.post'); 
+        Route::get('/register', 'index')->name('register');
+        Route::post('/register', 'store')->name('register.post');
     });
 });

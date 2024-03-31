@@ -12,9 +12,8 @@ class HomeController extends Controller
 {
     public function index(){
         $borrowedBooks = BorrowedBook::where('user_id', auth()->user()->id)->get();
-        $totalUser = User::count();
         $totalBook = Book::count();
         $bookRecentImgs = Book::orderBy('id', 'desc')->limit(5)->get();
-        return view('pages.home', compact('borrowedBooks', 'totalUser', 'totalBook' , 'bookRecentImgs'));
+        return view('pages.home', compact('borrowedBooks', 'totalBook' , 'bookRecentImgs'));
     }
 }

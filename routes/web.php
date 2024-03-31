@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\BookStatus;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Chat\ChatController;
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/cancel/{id}', 'cancelBooking')->name('library.cancel');
             Route::get('/cancelJS/{id}', 'cancelBookingAjax')->name('library.cancel.ajax');
             Route::get('/QrCode/{id}', 'generateQRToBorrow')->name('library.QrCode');
-            Route::post('/return', 'generateQRToReturn')->name('library.return');
+            Route::get('/return/{id}', 'generateQRToReturn')->name('library.return');
             Route::post('/confirmed', 'confirmedStatus')->name('library.confirmed');
         });
     });
@@ -101,6 +102,7 @@ Route::middleware('auth')->group(function () {
         });
         Route::get('/borrow/{borrowedId}/{stockId}', [LibraryController::class, 'readQRCodeToBorrow'])->name('library.readQRCodeToBorrow');
         Route::get('/return/{borrowedId}', [LibraryController::class, 'readQRCodeToReturn'])->name('library.readQRCodeToReturn');
+
     });
 });
 require __DIR__ . '/auth.php';

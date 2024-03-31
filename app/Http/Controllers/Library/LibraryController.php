@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Library;
 
+use App\Models\BookStatus;
 use Exception;
 use App\Models\Book;
 use App\Models\User;
@@ -34,7 +35,7 @@ class LibraryController extends Controller
             ]);
         }
         if(BorrowedBook::where('book_id', $bookData->id)->where('user_id', Auth::user()->id)->where('status_id', 4)->get()->count() > 0) {
-            $borrowedBook = BorrowedBook::where('book_id', $bookData->id)->where('user_id', Auth::user()->id)->where('status_id', 3)->first();
+            $borrowedBook = BorrowedBook::where('book_id', $bookData->id)->where('user_id', Auth::user()->id)->where('status_id', 4)->first();
             return view('pages.library.show-book', [
                 'bookData' => $bookData,
                 'bookStock' => $bookStock,
@@ -119,8 +120,8 @@ class LibraryController extends Controller
             $encryptBorrowedId = Crypt::encryptString($borrowedData->id);
             $encryptStockId = Crypt::encryptString($borrowedData->stock_id);
             // $url = 'http://192.168.97.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
-            // $url = 'http://192.168.100.92/:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            // $url = 'http://192.168.138.33:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
+            $url = 'http://192.168.100.92:8000/' . 'borrow/' . $encryptBorrowedId . '/' . $encryptStockId;
             return response(QrCode::size(300)->generate($url));
         } catch (\Throwable $th) {
             return response()->json(['error' => $th->getMessage()], 400);
@@ -151,18 +152,20 @@ class LibraryController extends Controller
             $userData->last_borrowed_date = date('Y-m-d');
             $userData->save();
 
-            return redirect()->route('borrowed.index')->with('success', 'Book Borrowed Successfully');
+            return view('pages.invoice.borrow',[
+                'borrowedData' => BorrowedBook::where('id', $BorrowedId)->first()
+            ])->with('success', 'Book Borrowed Successfully');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
         }
     }
-    public function generateQRToReturn(Request $request)
+    public function generateQRToReturn($borrowedId)
     {
         try {
-            $borrowedId = Crypt::encryptString($request->borrowed_id);
+            $borrowedId = Crypt::encryptString($borrowedId);
             // $url = 'http://192.168.97.33:8000/' . 'return/' . $borrowedId;
-            $url = 'http://192.168.138.33:8000/' . 'return/' . $borrowedId;
-            // $url = 'http://192.168.100.92:8000/' . 'return/' . $borrowedId;
+            // $url = 'http://192.168.138.33:8000/' . 'return/' . $borrowedId;
+            $url = 'http://192.168.100.92:8000/' . 'return/' . $borrowedId;
 
             return QrCode::size(300)->generate($url);
         } catch (\Throwable $th) {
@@ -173,31 +176,31 @@ class LibraryController extends Controller
     {
         try {
             $borrowedId = Crypt::decryptString($borrowedIdEncrypted);
+            $dataStatus = BookStatus::all();
             $borrowedData = BorrowedBook::where('id', $borrowedId)->first();
-            $borrowedData->update([
-                'status_id' => 2,
-                'is_returned' => 1
+
+            return view('pages.invoice.return',[
+                'dataStatus' => $dataStatus,
+                'borrowedData' => $borrowedData
             ]);
-            return redirect()->route('borrowed.index')->with('success', 'Book Returned Successfully');
         } catch (\Throwable $th) {
             return redirect()->route('borrowed.index')->with('error', $th->getMessage());
         }
     }
     public function confirmedStatus(Request $request){
-        // "borrowed_id" => "4"
-        // "status_id" => "2"
         try{
             $borrowedData = BorrowedBook::where('id', $request->borrowed_id)->first();
             $stockData = BookStock::where('id', $borrowedData->stock_id)->first();
             $borrowedData->update([
-                'status_id' => $request->status_id
+                'status_id' => $request->status_id,
+                'is_returned' => 1
             ]);
             $stockData->update([
                 'status_id' => $request->status_id
             ]);
-            return redirect()->back()->with('success', 'Status Updated Successfully');
+            return response()->json(['success' => 'Status Updated Successfully']);
         } catch (\Throwable $th){
-            return redirect()->back()->with('error', $th->getMessage());
+            return response()->json(['error' => $th->getMessage()], 400);
         }
     }
 }

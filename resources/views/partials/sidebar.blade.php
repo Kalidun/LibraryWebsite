@@ -94,15 +94,6 @@
                         </span>
                     </a>
                 </li>
-                <li>
-                    <a href="{{ route('data.returnPage') }}"
-                        class="flex items-center w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group text-base hover:bg-teal-300 hover:text-white {{ request()->routeIs('data.returnPage') ? 'bg-teal-300 text-white' : '' }}">
-                        <i class="fa-solid fa-hourglass-end"></i>
-                        <span class="flex-1 ms-3 whitespace-nowrap">
-                            Return Book 
-                        </span>
-                    </a>
-                </li>
             </ul>
         </li>
         <li>

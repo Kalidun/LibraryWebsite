@@ -30,7 +30,7 @@
                             <td>{{ $user->created_at->diffForHumans() }}</td>
                             <td class="text-center">{{ $user->borrowedBooks()->count() }}</td>
                             <td class="text-center">
-                                <a href="#"><i class="fa-solid fa-comments"></i></a>
+                                <a href="{{ route('chat.index') }}"><i class="fa-solid fa-comments"></i></a>
                             </td>
                         @empty
                             <td colspan="7" class="text-center"><i class="fa-solid fa-triangle-exclamation mx-1"></i>No Data</td>

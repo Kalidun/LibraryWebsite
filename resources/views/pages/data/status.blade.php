@@ -1,7 +1,6 @@
 @extends('pages.data.index')
 
 @section('data')
-    @include('pages.data.modal.modal-add-status')
     @include('pages.data.modal.modal-delete-status')
     @include('pages.data.modal.modal-edit-status')
     <div>
@@ -9,12 +8,12 @@
             <p class="font-bold text-xl">Status Data</p>
         </div>
         <div id="body">
-            <div class="w-full flex justify-end">
+            {{-- <div class="w-full flex justify-end">
                 <button
                     class="p-2 bg-teal-200 rounded-xl hover:bg-teal-300 active:bg-teal-400 transition duration-100 active:scale-105" data-modal-target="add-status-modal" data-modal-toggle="add-status-modal">
                     Add Status
                 </button>
-            </div>
+            </div> --}}
             <div class="w-full mt-5">
                 <table class="w-full">
                     <tr class="bg-teal-200 w-full">

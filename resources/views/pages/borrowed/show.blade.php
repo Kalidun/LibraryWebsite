@@ -53,9 +53,7 @@
                             <div class="text-center font-bold text-black border border-black rounded-xl p-1 w-1/2">Booked</div>
                         </div>
                     @endif
-                    <div id="qr">
 
-                    </div>
                 </div>
                 <div id="description" class="flex flex-col">
                     <p class="font-bold">Description</p>
@@ -66,4 +64,30 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#send-back-button').on('click', function() {
+                $.ajax({
+                    url: "{{ route('library.return', $bookData->id) }}",
+                    type: 'GET',
+                    success: function(data, textStatus, xhr) {
+                        if (xhr.status === 200) {
+                            console.log(data);
+                            $('#qr').html(data);
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            toastr.error(xhr.responseJSON.error);
+                        } else {
+                            toastr.error(error);
+                        }
+                        $('#close').click();
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

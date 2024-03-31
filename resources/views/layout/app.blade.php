@@ -24,7 +24,7 @@
             scroll-behavior: smooth;
         }
     </style>
-    <link rel="stylesheet" href="{{ asset('build/assets/app-13c1bf43.css') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-f60761f9.css') }}">
     <script src="{{ asset('build/assets/app-1623dfb9.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @livewireStyles
